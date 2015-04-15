@@ -6,5 +6,5 @@
         <div class="col-xs-12 text-center">
             <?php echo $array_ini['derechos'] ?>
         </div>
-    </div>
+    </div> 
 </div>
