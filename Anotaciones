@@ -1,0 +1,16 @@
+xs Telefonos   x  <  768 px
+sm Tablet      768  <=  x  <  992 px
+md Desktop M   992  <=  x  <  1200 px
+lg Desktop L   1200  >=  x
+
+Mensajes 
+1 = Correcto
+2 = No correcto
+
+
+Colores
+Green 600   #43a047     color_primary
+white       #ffffff     text_color_primary
+            #000000     text_color_default opacity 87%
+Blue 500    #2196f3     text_color_accent
+Green 50    #e8f5e9     windows_background

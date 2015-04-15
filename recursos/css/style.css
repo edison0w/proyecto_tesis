@@ -1,0 +1,37 @@
+#color_primary{
+    background-color: #43a047;
+}
+#text_color_primary{
+    color: #ffffff;
+}
+#text_color_default{
+    color: #000000;
+    opacity: .70;
+}
+#windows_background{
+    background-color: #e8f5e9;
+}
+#text_color_accent{
+    color: #2196f3;
+}
+#divider{
+    background-color: #FFFFFF;
+}
+.color_primary{
+    background-color: #43a047;
+}
+.text_color_primary{
+    color: #ffffff;
+}
+.text_color_default{
+    color: #000000;
+    opacity: .75;
+}
+.windows_background{
+    background-color: #e8f5e9;
+}
+.text_color_accent{
+    color: #2196f3;
+}
+
+
