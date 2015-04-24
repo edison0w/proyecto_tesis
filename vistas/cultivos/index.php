@@ -6,6 +6,7 @@ $_SESSION['mSocio'] = "";
 $_SESSION['mTerreno'] = "";
 $_SESSION['mCultivo'] = "active";
 $array_ini = parse_ini_file("../../recursos/properties.ini");
+$direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proyecto'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,14 +68,7 @@ $array_ini = parse_ini_file("../../recursos/properties.ini");
                 <div class="row">
                     <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:location.href = 'registrar.php'" >
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="glyphicon glyphicon-plus" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['nuevo'] ?>
-                                </div>
-                            </div>
+                             <img src="../../recursos/img/ic_action_new.png" />
                         </button>
                     </div>
                     <!--
@@ -93,14 +87,7 @@ $array_ini = parse_ini_file("../../recursos/properties.ini");
                     -->
                     <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:location.href = 'todos.php'">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <span class="glyphicon glyphicon-credit-card" style="font-size: 20px"></span>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['todos'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_select_all.png" />
                         </button>
                     </div>
                 </div>

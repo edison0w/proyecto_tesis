@@ -9,6 +9,7 @@ $_SESSION['mSocio'] = "";
 $_SESSION['mTerreno'] = "active";
 $_SESSION['mCultivo'] = "";
 $array_ini = parse_ini_file("../../recursos/properties.ini");
+$direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proyecto'];
 $objTerreno = new clsTerreno();
 // llenamos los terrenos de todos o del socio en sesion
 if ($_SESSION['socio']->getCodigo() != 0) {
@@ -22,6 +23,8 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $array_ini['sistema'] ?></title>
         <!-- recursos CSS -->
         <link href="../../recursos/css/misEstilos.css" rel="stylesheet" type="text/css"/>
@@ -138,7 +141,7 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
         <div id="margen-top" class="container">
 
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['terrenos'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -160,7 +163,7 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
                         <th><?php echo $array_ini['numTerreno'] ?></th>
                         <th><?php echo $array_ini['areaRiego'] ?></th>
                         <th><?php echo $array_ini['areaSuceptibleRiego'] ?></th>
-                        <th><?php echo $array_ini['areaNoSuceptibleRiego'] ?></th>
+                        <!--<th><php echo $array_ini['areaNoSuceptibleRiego'] ?></th>-->
                         <th><?php echo $array_ini['opciones'] ?></th>
                     </tr>
                 </thead>
@@ -199,28 +202,14 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
             <div class="navbar-inverse navbar-fixed-bottom visible-xs visible-sm">
                 <div class="row">
 
-                    <div class="col-xs-2 col-xs-offset-4">
+                    <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['volver'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_back.png" />
                         </button>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="location.href = 'registrar.php'">
-                            <div class="row ">
-                                <div class="col-xs-12">
-                                    <div class="glyphicon glyphicon-plus-sign" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['nuevo'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_new.png" />
                         </button>
                     </div>
 

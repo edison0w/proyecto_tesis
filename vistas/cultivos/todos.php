@@ -7,6 +7,7 @@ require __DIR__ . "/../../modelo/clsAsignarCultivo.php";
 require __DIR__ . "/../../recursos/utilitarios.php";
 session_start();
 $array_ini = parse_ini_file("../../recursos/properties.ini");
+$direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proyecto'];
 $_SESSION['mSocio'] = "";
 $_SESSION['mTerreno'] = "";
 $_SESSION['mCultivo'] = "active";
@@ -131,7 +132,7 @@ $tablaCultivos = tablaDatosTerrenoAsignarCultivos($lista);
                         <th><?php echo $array_ini['porcentaje'] ?></th>
                         <th><?php echo $array_ini['area'] ?></th>
                         <th><?php echo $array_ini['tipoRiego'] ?></th>
-                        <th><?php echo $array_ini['opciones'] ?></th>
+                        <th><?php echo $array_ini['op'] ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -171,26 +172,12 @@ $tablaCultivos = tablaDatosTerrenoAsignarCultivos($lista);
 
                     <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                            <div class="row">
-                                <div >
-                                    <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['volver'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_back.png" />
                         </button>
                     </div>
                     <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="location.href = 'registrar.php'">
-                            <div class="row ">
-                                <div >
-                                    <div class="glyphicon glyphicon-plus-sign" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['nuevo'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_new.png" />
                         </button>
                     </div>
 

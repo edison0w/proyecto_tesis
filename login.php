@@ -11,15 +11,9 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $array_ini['sistema'] ?></title>
         <!-- recursos CSS -->
-        <link href="recursos/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="recursos/css/bootstrap-checkbox.css" rel="stylesheet" type="text/css"/>
-        <link href="recursos/css/style.css" rel="stylesheet" type="text/css"/>
-        
+        <link href="recursos/css/misEstilos.css" rel="stylesheet" type="text/css"/>
         <!-- recursos javascript -->
-        <script src="recursos/js/jquery-2.1.3.min.js" type="text/javascript"></script>
-        <script src="recursos/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="recursos/js/bootstrap-checkbox.js" type="text/javascript"></script>
-        <script src="recursos/js/jquery.bootstrap-growl.min.js" type="text/javascript"></script>
+        <script src="recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
             $(document).on("ready", function () {
                 $('input[type="checkbox"]').checkbox();
@@ -36,7 +30,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                     passField.type = "password"
                 }
             }
-            
+
             function formularioPost() {
                 var usuario = document.getElementById('txtUsuario');
                 var clave = document.getElementById('txtClave');
@@ -72,9 +66,9 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xmlhttp.send(formularioPost());
             }
-            
-            function onKey(event){
-                if (event.key=="Enter"){
+
+            function onKey(event) {
+                if (event.key == "Enter") {
                     login();
                 }
             }
@@ -83,53 +77,61 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
     <body id="windows_background">
 
         <div class="container">
-            <!-- Titulo -->
             <div class="row">
-                <div id="text_color_accent" class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-                    <h4><?php echo $array_ini['accesosistema'] ?></h4>
+                <div class="col-xs-12 text-center">
+                    <img src="recursos/img/jurechgis.png" width="100px"/>
                 </div>
             </div>
+            <!-- Titulo -->
             <div class="row">
-                <div class="col-xs-12" ><hr id="text_color_accent"></div>
+                <div id="text_color_accent" class="col-xs-12 text-center">
+                    <h4><?php echo $array_ini['accesosistema'] ?></h4>
+                </div>
             </div>
             <!-- Formulario -->
             <form>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
                         <div class="form-group">
-                            <label id="text_color_default" for="txtUsuario" class="hidden-xs">
+                            <label id="text_color_primary" for="txtUsuario" class="hidden-xs">
                                 <?php echo $array_ini['usuario'] ?>
                             </label>
-                            <input id="txtUsuario" name="txtUsuario" type="text" class="form-control" placeholder="Usuario">
+                            <input id="txtUsuario" name="txtUsuario" type="text" class="form-control" placeholder="Usuario"
+                                   title="Ingrese su cédula">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
                         <div class="form-group">
-                            <label for="txtClave" class="hidden-xs">
+                            <label id="text_color_primary" for="txtClave" class="hidden-xs">
                                 <?php echo $array_ini['clave'] ?>
                             </label>
                             <input id="txtClave" name="txtClave" type="password" class="form-control" 
-                                   placeholder="Clave" onkeypress="onKey(event)">
+                                   placeholder="Clave" onkeypress="onKey(event)" title="Ingrese su clave">
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div id="text_color_accent" class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-                        <input id="cbClave" type="checkbox" data-label="Mostrar clave" onclick="mostrarUOcultarClave();"/>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-                        <button id="operacion" onclick="login();" type="button" class="btn btn-info btn-block">
+                        <button id="operacion" onclick="login();" type="button" class="btn btn-success btn-block">
                             <?php echo $array_ini['acceder'] ?>
                         </button>
                     </div>
                 </div>
             </form>
 
-            <?php include __DIR__ . '/recursos/inc/pie.php'; ?>
+            <div id="espacio-pie" class="row text-center">
+                <img src="<?php echo $direccion ?>/recursos/img/bg_pie.png" width="80%"/>
+            </div>
+            <div class="row">
+                <div class="text-center">
+                    <?php echo $array_ini['copyright'] ?>
+                </div>
+                <div class="text-center">
+                    <?php echo $array_ini['derechos'] ?>
+                </div>
+            </div> 
 
         </div> <!-- /container -->
 

@@ -18,18 +18,9 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $array_ini['sistema'] ?></title>
         <!-- recursos CSS -->
-        <link href="../../recursos/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../../recursos/css/bootstrap-switch.css" rel="stylesheet" type="text/css"/>
-        <link href="../../recursos/css/style.css" rel="stylesheet" type="text/css"/>
-        <link href="../../recursos/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+        <link href="../../recursos/css/misEstilos.css" rel="stylesheet" type="text/css"/>
         <!-- recursos javascript -->
-        <script src="../../recursos/js/jquery-2.1.3.min.js" type="text/javascript"></script>
-        <script src="../../recursos/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../../recursos/js/bootstrap-switch.js" type="text/javascript"></script>
-        <script src="../../recursos/js/highlight.js" type="text/javascript"></script>
-        <script src="../../recursos/js/main.js" type="text/javascript"></script>
-        <script src="../../recursos/js/bootstrap-select.min.js" type="text/javascript"></script>
-        <script src="../../recursos/js/jquery.bootstrap-growl.min.js" type="text/javascript"></script>
+        <script src="../../recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
             function comprobarConyuge() {
                 var estadoCivil = document.getElementById('txtEstadoCivil');
@@ -165,13 +156,13 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
         <?php include __DIR__ . '/../../recursos/inc/menu.php'; ?>
 
         <!-- texto oculto / codigo terreno sesion -->
-        <input type="text" id="txtCodigo" value="<?php echo $_SESSION['usuario']->getId_referencia() ?>">
+        <input type="hidden" id="txtCodigo" value="<?php echo $_SESSION['usuario']->getId_referencia() ?>">
 
         <div id="margen-top" class="container">
 
             <!-- Titulo del Formulario-->
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['misDatos'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -256,15 +247,15 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                                 <?php echo $array_ini['tipopersona'] ?>
                             </label>
                             <div class="visible-xs visible-sm">
-                                <input type="checkbox" id="txtTipoPersona1" name="txtTipoPersona1" data-on-text="Natural" data-off-text="Jurídica"
-                                       data-label-text="Típo de Persona" data-on-color="primary" data-off-color="primary" class="form-control" checked disabled>
+                                <input type="checkbox" id="txtTipoPersona1" name="txtTipoPersona1" data-on-text="<?php echo $array_ini['natural'] ?>" data-off-text="<?php echo $array_ini['juridica'] ?>"
+                                       data-label-text="<?php echo $array_ini['tipopersona'] ?>" data-on-color="primary" data-off-color="primary" class="form-control" disabled>
                             </div>
                             <select id="txtTipoPersona2" name="txtTipoPersona2" class="form-control hidden-xs hidden-sm selectpicker" disabled>
                                 <option>Natural</option> 
                                 <option>Jurídico</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group hidden">
                             <label for="txtObservacion" class="hidden-xs">
                                 <?php echo $array_ini['observacion'] ?>
                             </label>

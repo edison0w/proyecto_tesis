@@ -9,6 +9,7 @@ require __DIR__ . "/../../modelo/clsModulo.php";
 require __DIR__ . "/../../recursos/utilitarios.php";
 session_start();
 $array_ini = parse_ini_file("../../recursos/properties.ini");
+$direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proyecto'];
 
 $objTerreno = new clsTerreno();
 $listaSocioTerrenos = $objTerreno->buscarTodosSocioTerrenos();
@@ -31,7 +32,8 @@ $optionsModulo = optionsModulo($datosModulo);
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo $array_ini['sistema'] ?></title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- recursos CSS -->
         <link href="../../recursos/css/misEstilos.css" rel="stylesheet" type="text/css"/>
         <!-- recursos javascript -->
@@ -209,7 +211,7 @@ $optionsModulo = optionsModulo($datosModulo);
 
             <!-- Titulo del Formulario-->
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['buscarTerreno'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -344,40 +346,19 @@ $optionsModulo = optionsModulo($datosModulo);
                 <!-- Barra de Navegacion inferior -->
                 <div class="navbar-inverse navbar-fixed-bottom visible-xs visible-sm">
                     <div class="row">
-                        <div class="col-xs-2 col-xs-offset-3 text-left">
+                        <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['atras'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_back.png" />
                             </button>
                         </div>
-                        <div class="col-xs-2 text-center">
+                        <div class="col-xs-4 text-center">
                             <button type="button" name="operacion" value="registrar" class="btn btn-link" onclick="registrar()">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-ok-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['registrar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_save.png" />
                             </button>
                         </div>
-                        <div class="col-xs-2 text-center">
+                        <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-link" onclick="resetear()">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-remove-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['cancelar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_cancel.png" />
                             </button>
                         </div>
                     </div>

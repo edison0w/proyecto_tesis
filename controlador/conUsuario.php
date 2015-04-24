@@ -4,6 +4,7 @@ require __DIR__ . '/../modelo/clsUsuario.php';
 require __DIR__ . '/../modelo/clsRol.php';
 require __DIR__ . '/../modelo/clsSocio.php';
 require __DIR__ . '/../modelo/clsTerreno.php';
+require __DIR__ . '/../modelo/clsCultivo.php';
 session_start();
 
 $host = $_SERVER['HTTP_HOST'];
@@ -20,10 +21,13 @@ if ($_POST['operacion'] == 'acceder') {
     if ($objUsuario->autenticar($usuario, $clave)) {
         $objRol->buscarXCodigo($objUsuario->getRol());
         if ($objRol->getRol() != "") {
+            // Usuario que se logea
             $_SESSION['usuario'] = $objUsuario;
             $_SESSION['rol'] = $objRol;
             $_SESSION['socio'] = new clsSocio();
             $_SESSION['terreno'] = new clsTerreno();
+            $_SESSION['cultivo'] = new clsCultivo();
+            $_SESSION['usu'] = new clsUsuario();
 
             $_SESSION['mSocio'] = "";
             $_SESSION['mTerreno'] = "";
@@ -64,11 +68,11 @@ if ($_POST['operacion'] == "actualizar") {
 
     $objUsuario->setId($_POST['txtId']);
     $objUsuario->setUsername($_POST['txtUsuario']);
-    if ($_POST['txtClave']!=""){
-        $objUsuario->setPassword($_POST['txtClave']);
-    } else {
-        $objUsuario->setPassword("");
-    }
+    //if ($_POST['txtClave'] != "") {
+      //  $objUsuario->setPassword($_POST['txtClave']);
+    //} else {
+        //$objUsuario->setPassword("");
+    //}
     $objUsuario->setNombres($_POST['txtNombres']);
     $objUsuario->setEmail($_POST['txtEmail']);
     $objUsuario->setTelefono($_POST['txtTelefono']);
@@ -88,7 +92,7 @@ if ($_POST['operacion'] == "actualizarDatos") {
 
     $objUsuario->setId($_POST['txtId']);
     $objUsuario->setUsername($_POST['txtUsuario']);
-    if ($_POST['txtClave']!=""){
+    if ($_POST['txtClave'] != "") {
         $objUsuario->setPassword($_POST['txtClave']);
     } else {
         $objUsuario->setPassword("");
@@ -118,5 +122,7 @@ if ($_POST['operacion'] == "eliminar") {
 
 if ($_POST['operacion'] == "traspaso") {
     $objUsuario->setId($_POST['txtIdUsuario']);
+    // Usuario que pueden acceder al sistema
     $_SESSION['usu'] = $objUsuario;
 }
+

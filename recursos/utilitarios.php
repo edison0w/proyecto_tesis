@@ -15,7 +15,7 @@ function tablaDatosSocios($lista) {
     $index = 1;
     foreach ($lista as $row) {
         $tabla .= "<tr>
-                <td>" . $row['CI'] . "</td>
+                <td style='text-align: center'>" . $row['CI'] . "</td>
                 <td>" . $row['APELLIDO'] . "</td>
                 <td class='text-center'>" .
                 "<form method='POST' action='../../controlador/conReporte.php'>"
@@ -67,7 +67,7 @@ function tablaDatosUsuarios($lista) {
     return $tabla;
 }
 
-//TABLA DATOS TERRENOS
+//TABLA DATOS TERRENOS <td>" . $row['AREAN'] . "</td>
 function tablaDatosTerrenos($lista) {
     $tabla = "";
     $index = 1;
@@ -76,7 +76,7 @@ function tablaDatosTerrenos($lista) {
                 <td>" . $row['NUM_TERRENO'] . "</td>
                 <td>" . $row['AREA'] . "</td>
                 <td>" . $row['AREAS'] . "</td>
-                <td>" . $row['AREAN'] . "</td>
+                
                 <td class='text-center'>" .
                 "<button type='button' class='btn-link' value='" . $row['NUM_TERRENO'] . "' onclick='actualizar(this.value)'> 
                         <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
@@ -135,6 +135,23 @@ function tablaDatosTerrenoAsignarCultivos($lista) {
                         <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                 </button>
                 </td>
+              </tr>";
+        $index++;
+    }
+    return $tabla;
+}
+
+//TABLA DATOS TERRENOS MIS CULTIVOS
+function tablaDatosTerrenoAsignarCultivos2($lista) {
+    $tabla = "";
+    $index = 1;
+    foreach ($lista as $row) {
+        $tabla .= "<tr>
+                <td>" . $row['NOMBRE'] . "</td>
+                <td>" . $row['PORCENTAJE'] . "</td>
+                <td>" . $row['AREA'] . "</td>
+                <td>" . $row['TIPO_RIEGO'] . "</td>
+                
               </tr>";
         $index++;
     }

@@ -66,38 +66,17 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 <div class="row">
                     <div class="col-xs-4 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:location.href = 'registrar.php'" >
-                            <div class="row">
-                                <div >
-                                    <div class="glyphicon glyphicon-plus" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['nuevo'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_new.png" />
                         </button>
                     </div>
                     <div class="col-xs-4 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:location.href = 'buscar.php'">
-                            <div class="row">
-                                <div >
-                                    <span class="glyphicon glyphicon-search" style="font-size: 20px;"></span>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['buscar'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_search.png" />
                         </button>
                     </div>
                     <div class="col-xs-4 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:location.href = 'todos.php'">
-                            <div class="row">
-                                <div >
-                                    <span class="glyphicon glyphicon-credit-card" style="font-size: 20px"></span>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['todos'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_select_all.png" />
                         </button>
                     </div>
                 </div>

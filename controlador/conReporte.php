@@ -40,7 +40,7 @@ if ($_POST['operacion'] == "pdf") {
     } else {
         $j = "= " . $_POST['txtJunta'];
     }
-
+    
     $pdf = new PDF();
     $pdf->AliasNbPages();
     $pdf->AddPage();
@@ -48,7 +48,7 @@ if ($_POST['operacion'] == "pdf") {
     $pdf->Cell(80);
     $pdf->Cell(30, 10, "Lista de Socios ", 0, 0, "C");
     $pdf->Ln();
-    $pdf->SetFont('Arial', '', 10);
+    $pdf->SetFont('Arial', 'B', 10);
     // TABLA DE DATOS
     $w = array(28, 90, 30, 40);
     // Cabeceras
@@ -57,6 +57,7 @@ if ($_POST['operacion'] == "pdf") {
         $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C');
     $pdf->Ln();
     // Datos
+    $pdf->SetFont('Arial', '', 10);
     $objSocio = new clsSocio();
     $data = $objSocio->buscarXCodigoJunta($j);
     foreach ($data as $row) {

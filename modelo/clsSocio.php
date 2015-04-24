@@ -192,7 +192,7 @@ class clsSocio {
         $exito = false;
         $objDatos = new clsDatos();
         $sql = "insert into socio(CODIGO, CI, APELLIDO, OBS, GENERO, COD_BARRA, DIRECCION, TELEFONO, CELULAR, EMAIL, ESTADO_CIVIL, NOMBRE_CONYUGE, FOTO, COD_USUARIO, FECHA_ACTUALIZACION, ESTADO, SECTOR, TIPO) values("
-                . "$this->codigo, '$this->ci', '$this->apellido', '$this->obs', '$this->genero', '$this->cod_barra', '$this->direccion', '$this->telefono', '$this->celular', '$this->email', '$this->estado_civil', '$this->nombre_conyuge', '$this->foto', $this->cod_usuario, now(), '$this->estado', $this->sector, '$this->tipo')";
+                . "$this->codigo, '$this->ci', '$this->apellido', '$this->obs', '$this->genero', '$this->cod_barra', '$this->direccion', '$this->telefono', '$this->celular', '$this->email', '$this->estado_civil', '$this->nombre_conyuge', '$this->foto', $this->cod_usuario, now(), '$this->estado', $this->sector, '$this->tipo');";
         if ($objDatos->ejecutar($sql)) {
             $exito = true;
         }

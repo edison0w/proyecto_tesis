@@ -726,8 +726,8 @@ body {
     padding-bottom: 40px;
 }
 #espacio-pie{
-    padding-top: 10%;
-    padding-bottom: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%
 }
 .checkbox{
     margin-top: 0;
@@ -884,35 +884,27 @@ body {
         height: 500px;
     }
 }
+#color_primary_dark{
+    background-color: #388e3c;
+}
 #color_primary{
-    background-color: #43a047;
+    background-color: #4caf50;
 }
+/* Negro */
 #text_color_primary{
-    color: #ffffff;
-}
-#text_color_default{
-    color: #000000;
+    color: #000000; 
     opacity: .80;
 }
+/* Negro */
+#text_color_secondary{
+    color: #000000; 
+    opacity: .10;
+}
+/*  Blanco */
 #windows_background{
-    background-color: #e8f5e9;
+    background-color: #ffffff; 
 }
+/* Azul */
 #text_color_accent{
-    color: #2196f3;
-}
-.color_primary{
-    background-color: #43a047;
-}
-.text_color_primary{
-    color: #ffffff;
-}
-.text_color_default{
-    color: #000000;
-    opacity: .80;
-}
-.windows_background{
-    background-color: #e8f5e9;
-}
-.text_color_accent{
-    color: #2196f3;
+    color: #448aff; 
 }

@@ -150,7 +150,7 @@ $tabla = tablaDatosSocios($lista);
         <div id="margen-top" class="container">
 
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['socios'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -158,9 +158,9 @@ $tabla = tablaDatosSocios($lista);
             <table id="tblSocios" class="table table-striped table-bordered table-hover table-condensed table-responsive" >
                 <thead>
                     <tr>
-                        <th><?php echo $array_ini['cedula'] ?></th>
-                        <th><?php echo $array_ini['nombres'] ?></th>
-                        <th><?php echo $array_ini['opciones'] ?></th>
+                        <th style="text-align: center"><?php echo $array_ini['cedula'] ?></th>
+                        <th><?php echo $array_ini['nombre'] ?></th>
+                        <th style="text-align: center"><?php echo $array_ini['opciones'] ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -198,28 +198,14 @@ $tabla = tablaDatosSocios($lista);
             <div class="navbar-inverse navbar-fixed-bottom visible-xs visible-sm">
                 <div class="row">
 
-                    <div class="col-xs-2 col-xs-offset-4">
+                    <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['volver'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_back.png" />
                         </button>
                     </div>
-                    <div class="col-xs-2">
+                    <div class="col-xs-6 text-center">
                         <button type="button" class="btn btn-link" onclick="location.href = 'registrar.php'">
-                            <div class="row ">
-                                <div class="col-xs-12">
-                                    <div class="glyphicon glyphicon-plus-sign" style="font-size: 20px"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <?php echo $array_ini['nuevo'] ?>
-                                </div>
-                            </div>
+                            <img src="../../recursos/img/ic_action_new.png" />
                         </button>
                     </div>
 

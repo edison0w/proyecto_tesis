@@ -21,10 +21,8 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
         <script src="recursos/js/miJavaScript.js" type="text/javascript"></script>
     </head>
     <body id="windows_background">
-        <div class="container">
-            <?php include __DIR__ . '/recursos/inc/menu.php'; ?>
-            <?php include __DIR__ . '/recursos/inc/informacion.php'; ?>
-            <?php include __DIR__ . '/recursos/inc/pie.php'; ?>
-        </div>
+        <?php include __DIR__ . '/recursos/inc/menu.php'; ?>
+        <?php include __DIR__ . '/recursos/inc/informacion.php'; ?>
+        <?php include __DIR__ . '/recursos/inc/pie.php'; ?>
     </body>
 </html>

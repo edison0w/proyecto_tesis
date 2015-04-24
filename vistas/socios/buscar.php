@@ -18,14 +18,9 @@ $opciones = tablaDatosBuscar($listaSocios);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><?php echo $array_ini['sistema'] ?></title>
         <!-- recursos CSS -->
-        <link href="../../recursos/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../../recursos/css/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../../recursos/css/style.css" rel="stylesheet" type="text/css"/>
+        <link href="../../recursos/css/misEstilos.css" rel="stylesheet" type="text/css"/>
         <!-- recursos javascript -->
-        <script src="../../recursos/js/jquery-2.1.3.min.js" type="text/javascript"></script>
-        <script src="../../recursos/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="../../recursos/js/jquery.bootstrap-growl.min.js" type="text/javascript"></script>
-        <script src="../../recursos/js/bootstrap-select.min.js" type="text/javascript"></script>
+        <script src="../../recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
             function activarBotones() {
                 var btnActualizar = document.getElementById("btnActualizar");
@@ -34,8 +29,6 @@ $opciones = tablaDatosBuscar($listaSocios);
                 btnEliminar.disabled = false;
                 var btnTerrenos = document.getElementById("btnTerrenos");
                 btnTerrenos.disabled = false;
-                var btnCancelar = document.getElementById("btnCancelar");
-                btnCancelar.disabled = false;
             }
             function desactivarBotones() {
                 var btnActualizar = document.getElementById("btnActualizar");
@@ -44,8 +37,6 @@ $opciones = tablaDatosBuscar($listaSocios);
                 btnEliminar.disabled = true;
                 var btnTerrenos = document.getElementById("btnTerrenos");
                 btnTerrenos.disabled = true;
-                var btnCancelar = document.getElementById("btnCancelar");
-                btnCancelar.disabled = true;
             }
             function formularioPostBuscar(codSocio) {
                 return "txtCodigo=" + encodeURIComponent(codSocio.value) +
@@ -71,7 +62,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                             codigo.value = jsonObj.CODIGO;
                             var cedula = document.getElementById("txtCedula");
                             cedula.value = jsonObj.CI;
-                            cedula.disabled = false;
+                            cedula.disabled = true;
                             var apellidos = document.getElementById("txtApellidos");
                             apellidos.value = jsonObj.APELLIDO;
                             apellidos.disabled = false;
@@ -228,7 +219,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                             codigo.value = jsonObj.CODIGO;
                             var cedula = document.getElementById("txtCedula");
                             cedula.value = jsonObj.CI;
-                            cedula.disabled = false;
+                            cedula.disabled = true;
                             var apellidos = document.getElementById("txtApellidos");
                             apellidos.value = jsonObj.APELLIDO;
                             apellidos.disabled = false;
@@ -295,11 +286,9 @@ $opciones = tablaDatosBuscar($listaSocios);
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         var codigo = document.getElementById("txtCodigo");
                         codigo.value = 0;
-                        
                         var buscar = document.getElementById("txtBuscar");
                         buscar.value = 0;
                         $('#txtBuscar').selectpicker('refresh');
-                        
                         var cedula = document.getElementById("txtCedula");
                         cedula.value = "";
                         cedula.disabled = true;
@@ -367,7 +356,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['socio'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -494,7 +483,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                             <div class="glyphicon glyphicon-globe"></div>
                             <?php echo $array_ini['terrenos'] ?>
                         </button>
-                        <button id="btnCancelar" type="button" name="operacion" value="cancelar" class="btn btn-default" onclick="resetear()" disabled="true">
+                        <button id="btnCancelar" type="button" name="operacion" value="cancelar" class="btn btn-default" onclick="resetear()">
                             <div class="glyphicon glyphicon-repeat"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>
@@ -506,51 +495,24 @@ $opciones = tablaDatosBuscar($listaSocios);
                 <div class="navbar-inverse navbar-fixed-bottom visible-xs visible-sm">
                     <div class="row">
                         <div class="col-xs-3 text-center">
-                            <button id="btnActualizar" type="button" name="operacion" value="actualizar" class="btn btn-link" onclick="actualizar()">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-floppy-disk" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['actualizar'] ?>
-                                    </div>
-                                </div>
+                            <button id="btnActualizar2" type="button" name="operacion" value="actualizar" 
+                                    class="btn btn-link" onclick="actualizar()">
+                                <img src="../../recursos/img/ic_action_edit.png" />
                             </button>
                         </div>
                         <div class="col-xs-3 text-center">
                             <button id="btnEliminar" type="button" name="operacion" value="eliminar" class="btn btn-link" onclick="eliminar()">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-trash" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['eliminar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_discard.png" />
                             </button>
                         </div>
                         <div class="col-xs-3 text-center">
                             <button id="btnTerrenos" type="button" name="operacion" value="reset" class="btn btn-link" onclick="location.href = '../terrenos/todos.php'">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-globe" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['terrenos'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_map.png" />
                             </button>
                         </div>
                         <div class="col-xs-3 text-center">
                             <button id="btnCancelar" type="button" name="operacion" value="reset" class="btn btn-link" onclick="resetear()">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-repeat" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['cancelar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_cancel.png" />
                             </button>
                         </div>
                     </div>

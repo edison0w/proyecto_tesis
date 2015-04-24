@@ -7,6 +7,7 @@ require __DIR__ . "/../../modelo/clsTerreno.php";
 require __DIR__ . "/../../recursos/utilitarios.php";
 session_start();
 $array_ini = parse_ini_file("../../recursos/properties.ini");
+$direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proyecto'];
 
 $objCultivo = new clsCultivo();
 $datosCultivo = $objCultivo->buscarTodos();
@@ -240,38 +241,17 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                     <div class="row">
                         <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                                <div class="row">
-                                    <div >
-                                        <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['atras'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_back.png" />
                             </button>
                         </div>
                         <div class="col-xs-4 text-center">
                             <button type="button" name="operacion" value="registrar" class="btn btn-link" onclick="registrar()">
-                                <div class="row ">
-                                    <div >
-                                        <div class="glyphicon glyphicon-ok-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['registrar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_save.png" />
                             </button>
                         </div>
                         <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-link" onclick="resetear()">
-                                <div class="row ">
-                                    <div >
-                                        <div class="glyphicon glyphicon-remove-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['cancelar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_cancel.png" />
                             </button>
                         </div>
                     </div>

@@ -114,7 +114,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label id="text_color_default" for="txtCedula" class="hidden-xs">
                                 <?php echo $array_ini['cedula'] ?>
                             </label>
-                            <input id="txtCedula" name="txtCedula" type="text" class="form-control" placeholder="Cédula"  maxlength="10">
+                            <input id="txtCedula" name="txtCedula" type="number" class="form-control" placeholder="Cédula"  maxlength="10">
                         </div>
                         <div class="form-group">
                             <label for="txApellidos" class="hidden-xs">
@@ -132,19 +132,19 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label for="txtTelefono" class="hidden-xs">
                                 <?php echo $array_ini['telefono'] ?>
                             </label>
-                            <input id="txtTelefono" name="txtTelefono" type="text" class="form-control" placeholder="Teléfono">
+                            <input id="txtTelefono" name="txtTelefono" type="tel" class="form-control" placeholder="Teléfono">
                         </div>
                         <div class="form-group">
                             <label for="txtCelular" class="hidden-xs">
                                 <?php echo $array_ini['celular'] ?>
                             </label>
-                            <input id="txtCelular" name="txtCelular" type="text" class="form-control" placeholder="Celular">
+                            <input id="txtCelular" name="txtCelular" type="tel" class="form-control" placeholder="Celular">
                         </div>
                         <div class="form-group">
                             <label for="txtEmail" class="hidden-xs">
                                 <?php echo $array_ini['email'] ?>
                             </label>
-                            <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="Email">
+                            <input id="txtEmail" name="txtEmail" type="email" class="form-control" placeholder="Email">
                         </div>
                     </div>
 
@@ -220,28 +220,19 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 <!-- Barra de Navegacion inferior -->
                 <div class="navbar-inverse navbar-fixed-bottom visible-xs visible-sm">
                     <div class="row">
-                        <div class="col-xs-6 text-center">
-                            <button type="button" class="btn btn-link" onclick="registrar()">
-                                <div class="row ">
-                                    <div >
-                                        <div class="glyphicon glyphicon-ok-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['registrar'] ?>
-                                    </div>
-                                </div>
+                        <div class="col-xs-4 text-center">
+                            <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
+                                <img src="../../recursos/img/ic_action_back.png" />
                             </button>
                         </div>
-                        <div class="col-xs-6 text-center">
+                        <div class="col-xs-4 text-center">
+                            <button type="button" class="btn btn-link" onclick="registrar()">
+                                <img src="../../recursos/img/ic_action_save.png" />
+                            </button>
+                        </div>
+                        <div class="col-xs-4 text-center">
                             <button type="reset" class="btn btn-link">
-                                <div class="row ">
-                                    <div >
-                                        <div class="glyphicon glyphicon-remove-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['cancelar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_cancel.png" />
                             </button>
                         </div>
                     </div>

@@ -113,7 +113,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
 
             <!-- Titulo del Formulario-->
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['misDatos'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -133,7 +133,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label for="txClave" class="hidden-xs">
                                 <?php echo $array_ini['clave'] ?>
                             </label>
-                            <input id="txtClave" name="txtClave" type="text" class="form-control" placeholder="Clave" >
+                            <input id="txtClave" name="txtClave" type="text" class="form-control" placeholder="Nueva clave" >
                         </div>
                         <div class="form-group">
                             <label for="txtNombres" class="hidden-xs">
@@ -141,17 +141,15 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             </label>
                             <input id="txtNombres" name="txtNombres" type="text" class="form-control" placeholder="Nombres Completos">
                         </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
                             <label for="txtEmail" class="hidden-xs">
                                 <?php echo $array_ini['email'] ?>
                             </label>
                             <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="Correo">
                         </div>
-                        
-
-                    </div>
-
-                    <div class="col-xs-12 col-sm-6">
                         <div class="form-group">
                             <label for="txtTelefono" class="hidden-xs">
                                 <?php echo $array_ini['telefono'] ?>
@@ -164,7 +162,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             </label>
                             <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group hidden">
                             <label for="txtDescripcion" class="hidden-xs">
                                 <?php echo $array_ini['descripcion'] ?>
                             </label>
@@ -180,7 +178,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['actualizar'] ?>
                         </button>
-                        <button type="reset" class="btn btn-default">
+                        <button type="button" class="btn btn-default" onclick="cargarSesion()">
                             <div class="glyphicon glyphicon-remove"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>
@@ -190,40 +188,19 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 <!-- Barra de Navegacion inferior -->
                 <div class="navbar-inverse navbar-fixed-bottom visible-xs visible-sm">
                     <div class="row">
-                        <div class="col-xs-2 col-xs-offset-3">
+                        <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['volver'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_back.png" />
                             </button>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-4 text-center">
                             <button type="button" class="btn btn-link" onclick="actualizar()">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-ok-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['actualizar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_edit.png" />
                             </button>
                         </div>
-                        <div class="col-xs-2">
-                            <button type="reset" class="btn btn-link">
-                                <div class="row ">
-                                    <div class="col-xs-12">
-                                        <div class="glyphicon glyphicon-remove-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['cancelar'] ?>
-                                    </div>
-                                </div>
+                        <div class="col-xs-4 text-center">
+                            <button type="button" class="btn btn-link" onclick="cargarSesion()">
+                                <img src="../../recursos/img/ic_action_undo.png" />
                             </button>
                         </div>
                     </div>

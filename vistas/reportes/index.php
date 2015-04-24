@@ -12,7 +12,6 @@ $objJunta = new clsJunta();
 $datosJunta = $objJunta->buscarTodos();
 $optionsJunta = optionsJunta($datosJunta);
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +30,7 @@ $optionsJunta = optionsJunta($datosJunta);
         <div id="margen-top" class="container">
 
             <!-- Titulo del Formulario-->
-            <div class="row">
+            <div id="text_color_accent" class="row">
                 <div class="col-xs-12">
                     <?php echo $array_ini['generarReporte'] ?>
                 </div>
@@ -70,26 +69,12 @@ $optionsJunta = optionsJunta($datosJunta);
                     <div class="row">
                         <div class="col-xs-6 text-center">
                             <button type="button" class="btn btn-link" onclick="javascript:history.go(-1)">
-                                <div class="row">
-                                    <div >
-                                        <div class="glyphicon glyphicon-circle-arrow-left" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['volver'] ?>
-                                    </div>
-                                </div>
+                                 <img src="../../recursos/img/ic_action_back.png" />
                             </button>
                         </div>
                         <div class="col-xs-6 text-center">
                             <button name="operacion" value="pdf" type="submit" class="btn btn-link" >
-                                <div class="row ">
-                                    <div >
-                                        <div class="glyphicon glyphicon-ok-sign" style="font-size: 20px"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <?php echo $array_ini['generar'] ?>
-                                    </div>
-                                </div>
+                                <img src="../../recursos/img/ic_action_send_now.png" />
                             </button>
                         </div>
                     </div>
