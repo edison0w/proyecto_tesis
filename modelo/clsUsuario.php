@@ -141,7 +141,7 @@ class clsUsuario {
     public function autenticar($usuario, $clave) {
         $exito = false;
         $objDatos = new clsDatos();
-        $sql = "select * from Usuario u where u.username = '$usuario' and u.password = MD5('$clave')";
+        $sql = "select * from usuario u where u.username = '$usuario' and u.password = MD5('$clave')";
         $datos_desordenados = $objDatos->consultar($sql);
         if ($registros = $objDatos->registros($datos_desordenados)) {
             $this->id = $registros['id'];

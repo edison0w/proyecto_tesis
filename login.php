@@ -42,29 +42,43 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
             }
 
             function login() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        if (xmlhttp.responseText == "No existe un Perfil" || xmlhttp.responseText == "Usuario o contraseña incorrecta") {
-                            $.bootstrapGrowl(xmlhttp.responseText, {
-                                type: 'danger',
-                                align: 'right',
-                                stackup_spacing: 30,
-                                delay: 1500
-                            });
-                        } else {
-                            location.href = xmlhttp.responseText;
+                var boton = document.getElementById('operacion');
+                boton.disabled = true;
+
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            if (xmlhttp.responseText == "No existe un Perfil" || xmlhttp.responseText == "Usuario o contraseña incorrecta") {
+                                $.bootstrapGrowl(xmlhttp.responseText, {
+                                    type: 'danger',
+                                    align: 'right',
+                                    stackup_spacing: 30,
+                                    delay: 1500
+                                });
+                                boton.disabled = false;
+                            } else {
+                                location.href = xmlhttp.responseText;
+                            }
                         }
                     }
+                    xmlhttp.open("POST", "controlador/conUsuario.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPost());
+                } else {
+                    $.bootstrapGrowl("El usuario y/o la contraseña no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
+                    boton.disabled = false;
                 }
-                xmlhttp.open("POST", "controlador/conUsuario.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPost());
             }
 
             function onKey(event) {
@@ -72,10 +86,20 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                     login();
                 }
             }
+            function validar() {
+                var usuario = document.getElementById('txtUsuario');
+                var clave = document.getElementById('txtClave');
+                if (usuario.value == "") {
+                    return false;
+                } else if (clave.value == "") {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
         </script>
     </head>
     <body id="windows_background">
-
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 text-center">
@@ -89,37 +113,44 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 </div>
             </div>
             <!-- Formulario -->
-            <form>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-                        <div class="form-group">
-                            <label id="text_color_primary" for="txtUsuario" class="hidden-xs">
-                                <?php echo $array_ini['usuario'] ?>
-                            </label>
-                            <input id="txtUsuario" name="txtUsuario" type="text" class="form-control" placeholder="Usuario"
-                                   title="Ingrese su cédula">
-                        </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
+                <div class="form-group">
+                    <label id="text_color_primary" for="txtUsuario" class="control-label hidden-xs">
+                        <?php echo $array_ini['usuario'] ?>
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon1">*</span>
+                        <input id="txtUsuario" name="txtUsuario" type="text" class="form-control" placeholder="Usuario"
+                               title="Ingrese su cédula" aria-describedby="txtUsuarioStatus">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-                        <div class="form-group">
-                            <label id="text_color_primary" for="txtClave" class="hidden-xs">
-                                <?php echo $array_ini['clave'] ?>
-                            </label>
-                            <input id="txtClave" name="txtClave" type="password" class="form-control" 
-                                   placeholder="Clave" onkeypress="onKey(event)" title="Ingrese su clave">
-                        </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
+                <div class="form-group">
+                    <label id="text_color_primary" for="txtClave" class="hidden-xs">
+                        <?php echo $array_ini['clave'] ?>
+                    </label>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="sizing-addon1">*</span>
+                        <input id="txtClave" name="txtClave" type="password" class="form-control" 
+                               placeholder="Clave" onkeypress="onKey(event)" title="Ingrese su clave">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
-                        <button id="operacion" onclick="login();" type="button" class="btn btn-success btn-block">
-                            <?php echo $array_ini['acceder'] ?>
-                        </button>
-                    </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
+                    <?php echo $array_ini['camposrequeridos'] ?>
                 </div>
-            </form>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
+                    <button  id="operacion" onclick="login();" type="button" class="btn btn-success btn-block">
+                        <?php echo $array_ini['acceder'] ?>
+                    </button>
+                </div>
+            </div>
 
             <div id="espacio-pie" class="row text-center">
                 <img src="<?php echo $direccion ?>/recursos/img/bg_pie.png" width="80%"/>

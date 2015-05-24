@@ -34,6 +34,7 @@ $optionsModulo = optionsModulo($datosModulo);
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><?php echo $array_ini['sistema'] ?></title>
         <!-- recursos CSS -->
         <link href="../../recursos/css/misEstilos.css" rel="stylesheet" type="text/css"/>
         <!-- recursos javascript -->
@@ -100,6 +101,56 @@ $optionsModulo = optionsModulo($datosModulo);
                 xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xmlhttp.send(formularioPostBuscar(numTerreno));
+            }
+            function formularioPostActualizar() {
+                var codigo = document.getElementById('txtCodigo');
+                var codCatastral = document.getElementById('txtCodCatastral');
+                var codPredial = document.getElementById('txtCodPredial');
+                var areaRiego = document.getElementById('txtAreaRiego');
+                var areaSusceptible = document.getElementById('txtAreaSusceptible');
+                var areaNoSusceptible = document.getElementById('txtAreaNoSusceptible');
+                var condJuridica = document.getElementById('txtCondJuridica');
+                var codProvisional = document.getElementById('txtCodProvisional');
+                var junta = document.getElementById('txtJunta');
+                var valvula = document.getElementById('txtValvula');
+                var modulo = document.getElementById('txtModulo');
+                var observacion = document.getElementById('txtObservacion');
+
+                return "txtCodigo=" + encodeURIComponent(codigo.value) +
+                        "&txtCodCatastral=" + encodeURIComponent(codCatastral.value) +
+                        "&txtCodPredial=" + encodeURIComponent(codPredial.value) +
+                        "&txtAreaRiego=" + encodeURIComponent(areaRiego.value) +
+                        "&txtAreaSusceptible=" + encodeURIComponent(areaSusceptible.value) +
+                        "&txtAreaNoSusceptible=" + encodeURIComponent(areaNoSusceptible.value) +
+                        "&txtCondJuridica=" + encodeURIComponent(condJuridica.value) +
+                        "&txtCodProvisional=" + encodeURIComponent(codProvisional.value) +
+                        "&txtJunta=" + encodeURIComponent(junta.value) +
+                        "&txtValvula=" + encodeURIComponent(valvula.value) +
+                        "&txtModulo=" + encodeURIComponent(modulo.value) +
+                        "&txtObservacion=" + encodeURIComponent(observacion.value) +
+                        "&operacion=" + encodeURIComponent('actualizar') +
+                        "&nocache=" + Math.random();
+            }
+            function actualizar() {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        $.bootstrapGrowl(xmlhttp.responseText, {
+                            type: 'info',
+                            align: 'right',
+                            stackup_spacing: 30,
+                            delay: 1500
+                        });
+                    }
+                }
+                xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send(formularioPostActualizar());
             }
             function resetear() {
                 var codigo = document.getElementById("txtCodigo");
@@ -255,19 +306,19 @@ $optionsModulo = optionsModulo($datosModulo);
                             <label for="txtAreaRiego" class="hidden-xs">
                                 <?php echo $array_ini['areaRiego'] ?>
                             </label>
-                            <input id="txtAreaRiego" name="txtAreaRiego" type="number" class="form-control" placeholder="Area con Riego">
+                            <input id="txtAreaRiego" name="txtAreaRiego" type="text" class="form-control" placeholder="Area con Riego">
                         </div>
                         <div class="form-group">
                             <label for="txtAreaSusceptible" class="hidden-xs">
                                 <?php echo $array_ini['areaSuceptibleRiego'] ?>
                             </label>
-                            <input id="txtAreaSusceptible" name="txtAreaSusceptible" type="number" class="form-control" placeholder="Area Susceptible de Riego">
+                            <input id="txtAreaSusceptible" name="txtAreaSusceptible" type="tex" class="form-control" placeholder="Area Susceptible de Riego">
                         </div>
                         <div class="form-group">
                             <label for="txtAreaNoSusceptible" class="hidden-xs">
                                 <?php echo $array_ini['areaNoSuceptibleRiego'] ?>
                             </label>
-                            <input id="txtAreaNoSusceptible" name="txtAreaNoSusceptible" type="number" class="form-control" placeholder="Area Susceptible de Riego">
+                            <input id="txtAreaNoSusceptible" name="txtAreaNoSusceptible" type="text" class="form-control" placeholder="Area Susceptible de Riego">
                         </div>
                         <div class="form-group">
                             <label for="txtCondJuridica" class="hidden-xs">

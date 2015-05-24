@@ -906,5 +906,6 @@ body {
 }
 /* Azul */
 #text_color_accent{
+    font-weight: bold;
     color: #448aff; 
 }

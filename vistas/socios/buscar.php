@@ -470,20 +470,23 @@ $opciones = tablaDatosBuscar($listaSocios);
                 <!-- Barra de Navegacion Izquierda -->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button id="btnActualizar" type="button" name="operacion" value="actualizar" class="btn btn-info" onclick="actualizar()" disabled="true">
+                        <button id="btnActualizar" type="button" name="operacion" value="actualizar" class="btn btn-info" 
+                                onclick="actualizar()" disabled="true" title="Actualizar los datos del Socio">
                             <div class="glyphicon glyphicon-floppy-disk"></div>
                             <?php echo $array_ini['actualizar'] ?>
                         </button>
-                        <button id="btnEliminar" type="button" name="operacion" value="eliminar" class="btn btn-danger" data-toggle='modal' 
-                                data-target='#confirmacion' disabled="true">
+                        <button id="btnEliminar" type="button" name="operacion" value="eliminar" class="btn btn-danger" 
+                                data-toggle='modal' title="Eliminar al socio" data-target='#confirmacion' disabled="true">
                             <div class="glyphicon glyphicon-trash"></div>
                             <?php echo $array_ini['eliminar'] ?>
                         </button>
-                        <button id="btnTerrenos" type="button" name="operacion" value="terrenos" class="btn btn-success" onclick="location.href = '../terrenos/todos.php'" disabled="true">
+                        <button id="btnTerrenos" type="button" name="operacion" value="terrenos" class="btn btn-success" 
+                                onclick="location.href = '../terrenos/todos.php'" disabled="true" title="Visualizar los Terrenos del Socio seleccionado">
                             <div class="glyphicon glyphicon-globe"></div>
                             <?php echo $array_ini['terrenos'] ?>
                         </button>
-                        <button id="btnCancelar" type="button" name="operacion" value="cancelar" class="btn btn-default" onclick="resetear()">
+                        <button id="btnCancelar" type="button" name="operacion" value="cancelar" class="btn btn-default" 
+                                onclick="resetear()" title="Cancelar la busqueda y volver a empezar">
                             <div class="glyphicon glyphicon-repeat"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>

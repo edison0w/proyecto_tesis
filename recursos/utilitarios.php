@@ -19,19 +19,19 @@ function tablaDatosSocios($lista) {
                 <td>" . $row['APELLIDO'] . "</td>
                 <td class='text-center'>" .
                 "<form method='POST' action='../../controlador/conReporte.php'>"
-                . "<button type='button' class='btn-link' value='" . $row['CODIGO'] . "' onclick='actualizar(this.value)'> 
+                . "<button type='button' class='btn-link' value='" . $row['CODIGO'] . "' onclick='actualizar(this.value)' title='Editar al Socio'> 
                         <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
                 </button>
-                <button type='button' class='btn-link' value='" . $row['CODIGO'] . "' onclick='terreno(this.value)'> 
+                <button type='button' class='btn-link' value='" . $row['CODIGO'] . "' onclick='terreno(this.value)' title='Visualizar los Terrenos del Socio'> 
                         <span class='glyphicon glyphicon-globe' aria-hidden='true'></span>
                 </button>
                 <button type='button' class='btn-link' value='" . $row['CODIGO'] . "' data-toggle='modal' 
-                    data-target='#confirmacion' onclick='confirmacion(this.value)'> 
+                    data-target='#confirmacion' onclick='confirmacion(this.value)' title='Eliminar al Socio'> 
                         <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                 </button>
                 
                 <input type='hidden' id='txtCodSocio' name='txtCodSocio' value='".$row['CODIGO']."' />
-                <button type='submit' class='btn-link' id='operacion' name='operacion' value='pdfSocio'> 
+                <button type='submit' class='btn-link' id='operacion' name='operacion' value='pdfSocio' title='Generar un reporte del Socio'> 
                         <span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span>
                 </button>
                 </form>

@@ -29,21 +29,21 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 <div class="col-md-3">
                     <ul class="nav nav-pills nav-stacked hidden-xs hidden-sm">
                         <li role="presentation">
-                            <a href="registrar.php">
+                            <a href="registrar.php" title="Registrar un Nuevo Socio">
                                 <div class="glyphicon glyphicon-plus" ></div>
                                 <?php echo $array_ini['nuevo'] ?>
                             </a>
                             <hr style="margin: 0">
                         </li>
                         <li role="presentation">
-                            <a href="buscar.php">
+                            <a href="buscar.php" title="Buscar un nuevo Socio por cédula o nombre">
                                 <span class="glyphicon glyphicon-search"></span>
                                 <?php echo $array_ini['buscar'] ?>
                             </a>
                             <hr style="margin: 0">
                         </li>
                         <li role="presentation">
-                            <a href="todos.php">
+                            <a href="todos.php" title="Visualizar todos los socios">
                                 <span class="glyphicon glyphicon-credit-card" ></span>
                                 <?php echo $array_ini['todos'] ?>
                             </a>

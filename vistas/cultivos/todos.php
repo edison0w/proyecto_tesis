@@ -105,7 +105,7 @@ $tablaCultivos = tablaDatosTerrenoAsignarCultivos($lista);
         <div id="margen-top" class="container">
 
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['cultivos'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>

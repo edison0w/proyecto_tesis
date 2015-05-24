@@ -233,9 +233,10 @@ class clsTerreno {
     public function actualizar() {
         $exito = false;
         $objDatos = new clsDatos();
-        $sql = "update socio set APELLIDO = '$this->apellido', DIRECCION='$this->direccion', TELEFONO='$this->telefono', CELULAR='$this->celular',"
-                . "EMAIL='$this->email', TIPO='$this->tipo', ESTADO_CIVIL='$this->estado_civil', NOMBRE_CONYUGE='$this->nombre_conyuge', "
-                . "GENERO='$this->genero', OBS='$this->obs' where CI='$this->ci'";
+        $sql = "update terreno set COD_CATASTRAL = '$this->cod_catastral', CLAV_PREDIAL='$this->clav_predial', AREA=$this->area, "
+                . "AREAS=$this->areas, AREAN=$this->arean, COND_JURIDICA='$this->cond_juridica', CODIGO_PROVISIONAL=$this->codigo_provicional, "
+                . "COD_JUNTA=$this->cod_junta, COD_VALVULA=$this->cod_valvula, COD_MODULO=$this->cod_modulo , OBS='$this->obs' "
+                . "where NUM_TERRENO=$this->codigo";
         if ($objDatos->ejecutar($sql)) {
             $exito = true;
         }

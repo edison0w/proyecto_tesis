@@ -114,19 +114,28 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label id="text_color_default" for="txtCedula" class="hidden-xs">
                                 <?php echo $array_ini['cedula'] ?>
                             </label>
-                            <input id="txtCedula" name="txtCedula" type="number" class="form-control" placeholder="Cédula"  maxlength="10">
+                            <div class="input-group" style="display: block">
+                                <input id="txtCedula" name="txtCedula" type="text" class="form-control" placeholder="Cédula"  maxlength="10">
+                                <span class="form-control-feedback">*</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txApellidos" class="hidden-xs">
                                 <?php echo $array_ini['nombres'] ?>
                             </label>
-                            <input id="txtApellidos" name="txtApellidos" type="text" class="form-control" placeholder="Apellidos y Nombres" >
+                            <div class="input-group" style="display: block">
+                                <input id="txtApellidos" name="txtApellidos" type="text" class="form-control" placeholder="Apellidos y Nombres" >
+                                <span class="form-control-feedback">*</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtDireccion" class="hidden-xs">
                                 <?php echo $array_ini['direccion'] ?>
                             </label>
-                            <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
+                            <div class="input-group" style="display: block">
+                                <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
+                                <span class="form-control-feedback">*</span>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtTelefono" class="hidden-xs">
@@ -157,7 +166,7 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                                 <option><?php echo $array_ini['casado'] ?></option>
                                 <option><?php echo $array_ini['soltero'] ?></option>
                                 <option><?php echo $array_ini['viudo'] ?></option>
-                                <option><?php echo $array_ini['divorsiado'] ?></option>
+                                <option><?php echo $array_ini['divorciado'] ?></option>
                                 <option><?php echo $array_ini['unionlibre'] ?></option>
                             </select>
                         </div>
@@ -201,16 +210,21 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                         </div>
                     </div> 
 
+                    <div class="form-group col-xs-12 col-sm-6">
+                        <?php echo $array_ini['camposrequeridos'] ?>
+                    </div>
+
                 </div> <!-- ./row -->
 
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button name="operacion" value="registrar" type="button" class="btn btn-info" onclick="registrar();">
+                        <button name="operacion" value="registrar" type="button" class="btn btn-info" onclick="registrar();"
+                                title="Registrar los datos de un Socio">
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['registrar'] ?>
                         </button>
-                        <button type="reset" class="btn btn-default">
+                        <button type="reset" class="btn btn-default" title="Resetear todos los campos">
                             <div class="glyphicon glyphicon-remove"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>

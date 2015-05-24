@@ -52,7 +52,7 @@ if ($_POST['operacion'] == "pdf") {
     // TABLA DE DATOS
     $w = array(28, 90, 30, 40);
     // Cabeceras
-    $header = array('Cédula', 'Nombres', 'Teléfono', 'Persona');
+    $header = array( html_entity_decode('Cédula'), 'Nombres', 'Teléfono', 'Persona');
     for ($i = 0; $i < count($header); $i++)
         $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C');
     $pdf->Ln();

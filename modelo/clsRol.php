@@ -30,7 +30,7 @@ class clsRol {
     public function buscarXCodigo($id){
         $exito = false;
         $objDatos = new clsDatos();
-        $sql = "select * from Rol r where r.id_rol = $id limit 1";
+        $sql = "select * from rol r where r.id_rol = $id limit 1";
         $datos_desordenados = $objDatos->consultar($sql);
         if ($registros = $objDatos->registros($datos_desordenados)) {
             $this->id_rol = $registros['id_rol'];

@@ -28,6 +28,28 @@ if ($_POST['operacion'] == "registrar") {
     }
 }
 
+if ($_POST['operacion'] == "actualizar") {
+
+    $objTerreno->setCodigo($_POST['txtCodigo']);
+    $objTerreno->setCod_catastral($_POST['txtCodCatastral']);
+    $objTerreno->setClav_predial($_POST['txtCodPredial']);
+    $objTerreno->setArea($_POST['txtAreaRiego']);
+    $objTerreno->setAreas($_POST['txtAreaSusceptible']);
+    $objTerreno->setArean($_POST['txtAreaNoSusceptible']);
+    $objTerreno->setCond_juridica($_POST['txtCondJuridica']);
+    $objTerreno->setCodigo_provicional($_POST['txtCodProvisional']);
+    $objTerreno->setCod_junta($_POST['txtJunta']);
+    $objTerreno->setCod_valvula($_POST['txtValvula']);
+    $objTerreno->setCod_modulo($_POST['txtModulo']);
+    $objTerreno->setObs($_POST['txtObservacion']);
+
+    if ($objTerreno->actualizar()) {
+        echo "Terreno actualizado correctamente";
+    } else {
+        echo "No se pudo actualizar el terreno";
+    }
+}
+
 if ($_POST['operacion'] == "eliminar") {
 
     $objTerreno->setNum_terreno($_POST['txtNumTerreno']);

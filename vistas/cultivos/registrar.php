@@ -140,7 +140,7 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
 
             <!-- Titulo del Formulario-->
             <div class="row">
-                <div class="col-xs-12">
+                <div id="text_color_accent" class="col-xs-12">
                     <?php echo $array_ini['nuevoCultivo'] ?>
                 </div>
                 <div class="col-xs-12"><hr style="margin: 0 0 10px 0"></div>
@@ -186,13 +186,13 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                             <label for="txtFechaRegistro" class="hidden-xs">
                                 <?php echo $array_ini['fechaRegistro'] ?>
                             </label>
-                            <input value="<?php echo date("Y-m-d H:i:s"); ?>" id="txtFechaRegistro" name="txtFechaRegistro" type="date" class="form-control" placeholder="Fecha de Registro" disabled>
+                            <input value="<?php echo date("Y-m-d H:i:s"); ?>" id="txtFechaRegistro" name="txtFechaRegistro" type="text" class="form-control" placeholder="Fecha de Registro" disabled>
                         </div>
                         <div class="form-group">
                             <label for="txtEdadAlRegistro" class="hidden-xs">
                                 <?php echo $array_ini['edadAlRegistro'] ?>
                             </label>
-                            <input id="txtEdadAlRegistro" name="txtEdadAlRegistro" type="number" class="form-control" placeholder="Edad al Registro">
+                            <input id="txtEdadAlRegistro" name="txtEdadAlRegistro" type="number" class="form-control" placeholder="Edad al Registro (dias)">
                         </div>
 
                     </div>
@@ -205,7 +205,7 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                             </label>
 
                             <select id="txtTipoRiego" name="txtTipoRiego" class="selectpicker form-control">
-                                <option value="">Seleccione un Tipo Riego</option>
+                                <option value="">Seleccione el Tipo Riego</option>
                                 <option value="A">Aspersión</option>
                                 <option value="G">Goteo</option>
                                 <option value="Gr">Gravedad</option>
