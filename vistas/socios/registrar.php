@@ -67,29 +67,53 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                         "&nocache=" + Math.random();
             }
             function registrar() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        if (xmlhttp.responseText == "No se pudo ingresar al socio") {
-                            $.bootstrapGrowl(xmlhttp.responseText, {
-                                type: 'danger',
-                                align: 'right',
-                                stackup_spacing: 30,
-                                delay: 1500
-                            });
-                        } else {
-                            location.href = xmlhttp.responseText;
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            if (xmlhttp.responseText == "No se pudo ingresar al socio") {
+                                $.bootstrapGrowl(xmlhttp.responseText, {
+                                    type: 'danger',
+                                    align: 'right',
+                                    stackup_spacing: 30,
+                                    delay: 1500
+                                });
+                            } else {
+                                location.href = xmlhttp.responseText;
+                            }
                         }
                     }
+                    xmlhttp.open("POST", "../../controlador/conSocio.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPost());
+                } else {
+                    $.bootstrapGrowl("La cédula, nombres y dirección no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
                 }
-                xmlhttp.open("POST", "../../controlador/conSocio.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPost());
+            }
+            
+            function validar() {
+                var cedula = document.getElementById('txtCedula');
+                var apellido = document.getElementById('txtApellidos');
+                var direccion = document.getElementById('txtDireccion');
+                if (cedula.value == "") {
+                    return false
+                } else if (apellido.value == "") {
+                    return false
+                } else if (direccion.value == "") {
+                    return false
+                } else {
+                    return true
+                }
             }
         </script>
     </head>
@@ -114,46 +138,55 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label id="text_color_default" for="txtCedula" class="hidden-xs">
                                 <?php echo $array_ini['cedula'] ?>
                             </label>
-                            <div class="input-group" style="display: block">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
                                 <input id="txtCedula" name="txtCedula" type="text" class="form-control" placeholder="Cédula"  maxlength="10">
-                                <span class="form-control-feedback">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="txApellidos" class="hidden-xs">
                                 <?php echo $array_ini['nombres'] ?>
                             </label>
-                            <div class="input-group" style="display: block">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
                                 <input id="txtApellidos" name="txtApellidos" type="text" class="form-control" placeholder="Apellidos y Nombres" >
-                                <span class="form-control-feedback">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="txtDireccion" class="hidden-xs">
                                 <?php echo $array_ini['direccion'] ?>
                             </label>
-                            <div class="input-group" style="display: block">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
                                 <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
-                                <span class="form-control-feedback">*</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="txtTelefono" class="hidden-xs">
                                 <?php echo $array_ini['telefono'] ?>
                             </label>
-                            <input id="txtTelefono" name="txtTelefono" type="tel" class="form-control" placeholder="Teléfono">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtTelefono" name="txtTelefono" type="tel" class="form-control" placeholder="Teléfono">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtCelular" class="hidden-xs">
                                 <?php echo $array_ini['celular'] ?>
                             </label>
-                            <input id="txtCelular" name="txtCelular" type="tel" class="form-control" placeholder="Celular">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtCelular" name="txtCelular" type="tel" class="form-control" placeholder="Celular">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtEmail" class="hidden-xs">
                                 <?php echo $array_ini['email'] ?>
                             </label>
-                            <input id="txtEmail" name="txtEmail" type="email" class="form-control" placeholder="Email">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtEmail" name="txtEmail" type="email" class="form-control" placeholder="Email">
+                            </div>
                         </div>
                     </div>
 
@@ -206,15 +239,17 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label for="txtObservacion" class="hidden-xs">
                                 <?php echo $array_ini['observacion'] ?>
                             </label>
-                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación"></textarea>
+                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación <Opcional>"></textarea>
                         </div>
                     </div> 
 
-                    <div class="form-group col-xs-12 col-sm-6">
+                </div> <!-- ./row -->
+
+                <div class="row">
+                    <div class="form-group col-xs-12">
                         <?php echo $array_ini['camposrequeridos'] ?>
                     </div>
-
-                </div> <!-- ./row -->
+                </div>
 
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">

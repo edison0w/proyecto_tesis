@@ -183,25 +183,35 @@ $opciones = tablaDatosBuscar($listaSocios);
                         "&nocache=" + Math.random();
             }
             function actualizar() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        $.bootstrapGrowl(xmlhttp.responseText, {
-                            type: 'info',
-                            align: 'right',
-                            stackup_spacing: 30,
-                            delay: 1500
-                        });
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                     }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            $.bootstrapGrowl(xmlhttp.responseText, {
+                                type: 'info',
+                                align: 'right',
+                                stackup_spacing: 30,
+                                delay: 1500
+                            });
+                        }
+                    }
+                    xmlhttp.open("POST", "../../controlador/conSocio.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPostActualizar());
+                }else{
+                    $.bootstrapGrowl("La cédula, nombres y dirección no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
                 }
-                xmlhttp.open("POST", "../../controlador/conSocio.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPostActualizar());
+
             }
             function cargarSesion() {
                 var codSocio = document.getElementById('txtCodigo');
@@ -333,7 +343,22 @@ $opciones = tablaDatosBuscar($listaSocios);
                 }
                 xmlhttp.open("POST", "../../controlador/conSocio.php", true);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send("operacion=resetear"  + "&nocache=" + Math.random());
+                xmlhttp.send("operacion=resetear" + "&nocache=" + Math.random());
+            }
+
+            function validar() {
+                var cedula = document.getElementById('txtCedula');
+                var apellido = document.getElementById('txtApellidos');
+                var direccion = document.getElementById('txtDireccion');
+                if (cedula.value == "") {
+                    return false
+                } else if (apellido.value == "") {
+                    return false
+                } else if (direccion.value == "") {
+                    return false
+                } else {
+                    return true
+                }
             }
         </script>
     </head>
@@ -370,37 +395,55 @@ $opciones = tablaDatosBuscar($listaSocios);
                             <label for="txtCedula" class="hidden-xs">
                                 <?php echo $array_ini['cedula'] ?>
                             </label>
-                            <input id="txtCedula" name="txtCedula" type="text" class="form-control" placeholder="Cédula" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtCedula" name="txtCedula" type="text" class="form-control" placeholder="Cédula" disabled>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txApellidos" class="hidden-xs">
                                 <?php echo $array_ini['nombres'] ?>
                             </label>
-                            <input id="txtApellidos" name="txtApellidos" type="text" class="form-control" placeholder="Apellidos y Nombres" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtApellidos" name="txtApellidos" type="text" class="form-control" placeholder="Apellidos y Nombres" disabled>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtDireccion" class="hidden-xs">
                                 <?php echo $array_ini['direccion'] ?>
                             </label>
-                            <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección" disabled>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtTelefono" class="hidden-xs">
                                 <?php echo $array_ini['telefono'] ?>
                             </label>
-                            <input id="txtTelefono" name="txtTelefono" type="text" class="form-control" placeholder="Teléfono" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtTelefono" name="txtTelefono" type="text" class="form-control" placeholder="Teléfono" disabled>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtCelular" class="hidden-xs">
                                 <?php echo $array_ini['celular'] ?>
                             </label>
-                            <input id="txtCelular" name="txtCelular" type="text" class="form-control" placeholder="Celular" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtCelular" name="txtCelular" type="text" class="form-control" placeholder="Celular" disabled>
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtEmail" class="hidden-xs">
                                 <?php echo $array_ini['email'] ?>
                             </label>
-                            <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="Email" disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="Email" disabled>
+                            </div>
                         </div>
                     </div>
 
@@ -448,6 +491,12 @@ $opciones = tablaDatosBuscar($listaSocios);
                             <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación" disabled></textarea>
                         </div>
                     </div> <!-- ./jumbotron -->
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <?php echo $array_ini['camposrequeridos'] ?>
+                    </div>
                 </div>
 
                 <!-- Dialogo de confirmación -->
