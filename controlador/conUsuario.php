@@ -101,7 +101,7 @@ if ($_POST['operacion'] == "actualizarDatos") {
     $objUsuario->setEmail($_POST['txtEmail']);
     $objUsuario->setTelefono($_POST['txtTelefono']);
     $objUsuario->setDireccion($_POST['txtDireccion']);
-    $objUsuario->setDescripcion($_POST['txtDescripcion']);
+    //$objUsuario->setDescripcion($_POST['txtDescripcion']);
 
     if ($objUsuario->actualizarDatos()) {
         echo "Usuario actualizado correctamente";

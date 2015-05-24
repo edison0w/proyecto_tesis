@@ -50,10 +50,6 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             var direccion = document.getElementById("txtDireccion");
                             direccion.value = jsonObj.direccion;
                             direccion.disabled = false;
-
-                            var descripcion = document.getElementById("txtDescripcion");
-                            descripcion.value = jsonObj.descripcion;
-                            descripcion.disabled = false;
                         }
                     }
                 }
@@ -68,7 +64,6 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                 var email = document.getElementById("txtEmail");
                 var telefono = document.getElementById("txtTelefono");
                 var direccion = document.getElementById("txtDireccion");
-                var descripcion = document.getElementById("txtDescripcion");
                 return "txtId=" + encodeURIComponent(document.getElementById("txtCodigo").value) +
                         "&txtUsuario=" + encodeURIComponent(usuario.value) +
                         "&txtClave=" + encodeURIComponent(clave.value) +
@@ -76,30 +71,47 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                         "&txtEmail=" + encodeURIComponent(email.value) +
                         "&txtTelefono=" + encodeURIComponent(telefono.value) +
                         "&txtDireccion=" + encodeURIComponent(direccion.value) +
-                        "&txtDescripcion=" + encodeURIComponent(descripcion.value) +
                         "&operacion=" + encodeURIComponent('actualizarDatos') +
                         "&nocache=" + Math.random();
             }
             function actualizar() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        $.bootstrapGrowl(xmlhttp.responseText, {
-                            type: 'info',
-                            align: 'right',
-                            stackup_spacing: 30,
-                            delay: 1500
-                        });
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                     }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            $.bootstrapGrowl(xmlhttp.responseText, {
+                                type: 'info',
+                                align: 'right',
+                                stackup_spacing: 30,
+                                delay: 1500
+                            });
+                        }
+                    }
+                    xmlhttp.open("POST", "../../controlador/conUsuario.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPostActualizar());
+                } else {
+                    $.bootstrapGrowl("El usuario no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
                 }
-                xmlhttp.open("POST", "../../controlador/conUsuario.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPostActualizar());
+
+            }
+            function validar() {
+                var usuario = document.getElementById('txtUsuario');
+                if (usuario.value == "") {
+                    return false
+                } else {
+                    return true
+                }
             }
         </script>
     </head>
@@ -127,19 +139,28 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label for="txtUsuario" class="hidden-xs">
                                 <?php echo $array_ini['usuario'] ?>
                             </label>
-                            <input id="txtUsuario" name="txtUsuario" type="text" class="form-control" placeholder="Usuario"  onkeyup="funcionClave()">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtUsuario" name="txtUsuario" type="text" class="form-control" placeholder="Usuario"  onkeyup="funcionClave()">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txClave" class="hidden-xs">
                                 <?php echo $array_ini['clave'] ?>
                             </label>
-                            <input id="txtClave" name="txtClave" type="text" class="form-control" placeholder="Nueva clave" >
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtClave" name="txtClave" type="text" class="form-control" placeholder="Nueva clave" >
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtNombres" class="hidden-xs">
                                 <?php echo $array_ini['nombres'] ?>
                             </label>
-                            <input id="txtNombres" name="txtNombres" type="text" class="form-control" placeholder="Nombres Completos">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtNombres" name="txtNombres" type="text" class="form-control" placeholder="Nombres Completos">
+                            </div>
                         </div>
                     </div>
 
@@ -148,28 +169,37 @@ $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proye
                             <label for="txtEmail" class="hidden-xs">
                                 <?php echo $array_ini['email'] ?>
                             </label>
-                            <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="Correo">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="Correo">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtTelefono" class="hidden-xs">
                                 <?php echo $array_ini['telefono'] ?>
                             </label>
-                            <input id="txtTelefono" name="txtTelefono" type="text" class="form-control" placeholder="Teléfono">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtTelefono" name="txtTelefono" type="text" class="form-control" placeholder="Teléfono">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtDireccion" class="hidden-xs">
                                 <?php echo $array_ini['direccion'] ?>
                             </label>
-                            <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
-                        </div>
-                        <div class="form-group hidden">
-                            <label for="txtDescripcion" class="hidden-xs">
-                                <?php echo $array_ini['descripcion'] ?>
-                            </label>
-                            <textarea id="txtDescripcion" name="txtDescripcion" class="form-control" rows="4" placeholder="Descripción"></textarea>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtDireccion" name="txtDireccion" type="text" class="form-control" placeholder="Dirección">
+                            </div>
                         </div>
                     </div> 
                 </div> <!-- ./row -->
+
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <?php echo $array_ini['camposrequeridos'] ?>
+                    </div>
+                </div>
 
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
