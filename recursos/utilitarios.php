@@ -78,14 +78,14 @@ function tablaDatosTerrenos($lista) {
                 <td>" . $row['AREAS'] . "</td>
                 
                 <td class='text-center'>" .
-                "<button type='button' class='btn-link' value='" . $row['NUM_TERRENO'] . "' onclick='actualizar(this.value)'> 
+                "<button type='button' class='btn-link' value='" . $row['NUM_TERRENO'] . "' onclick='actualizar(this.value)' title='Editar terreno'> 
                         <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
                 </button>
-                <button type='button' class='btn-link' value='" . $row['NUM_TERRENO'] . "' onclick='cultivos(this.value)'> 
+                <button type='button' class='btn-link' value='" . $row['NUM_TERRENO'] . "' onclick='cultivos(this.value)' title='Visualizar los cultivos del terreno'> 
                         <span class='glyphicon glyphicon-leaf' aria-hidden='true'></span>
                 </button>
                 <button type='button' class='btn-link' value='" . $row['NUM_TERRENO'] . "' data-toggle='modal' 
-                    data-target='#confirmacion' onclick='confirmacion(this.value)'> 
+                    data-target='#confirmacion' onclick='confirmacion(this.value)' title='Eliminar al terreno'> 
                         <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                 </button>
                 </td>
@@ -127,11 +127,11 @@ function tablaDatosTerrenoAsignarCultivos($lista) {
                 <td>" . $row['AREA'] . "</td>
                 <td>" . $row['TIPO_RIEGO'] . "</td>
                 <td class='text-center'>" .
-                "<button type='button' class='btn-link' value='" . $row['NUMERO'] . "' onclick='actualizar(this.value)'> 
+                "<button type='button' class='btn-link' value='" . $row['NUMERO'] . "' onclick='actualizar(this.value)' title='Editar cultivo'> 
                         <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
                 </button>
                 <button type='button' class='btn-link' value='" . $row['NUMERO'] . "' data-toggle='modal' 
-                    data-target='#confirmacion' onclick='confirmacion(this.value)'> 
+                    data-target='#confirmacion' onclick='confirmacion(this.value)' title='Eliminar cultivo'> 
                         <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                 </button>
                 </td>
@@ -197,6 +197,22 @@ function optionsJunta($lista) {
             "</option>";
     $tabla .= "<option value='-1'>"
             . "TODOS" .
+            "</option>";
+    foreach ($lista as $row) {
+        $tabla .= "<option value='" . $row['COD_JUNTA'] . "'>"
+                . $row['SECTOR_NOMBRE'] .
+                "</option>";
+        $index++;
+    }
+    return $tabla;
+}
+
+// Listar todas las Juntas
+function optionsJuntaSinTodos($lista) {
+    $tabla = "";
+    $index = 1;
+    $tabla .= "<option value=''>"
+            . "Seleccione una Junta" .
             "</option>";
     foreach ($lista as $row) {
         $tabla .= "<option value='" . $row['COD_JUNTA'] . "'>"

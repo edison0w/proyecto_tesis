@@ -14,7 +14,7 @@ $optionsCondJuridica = sectionCondicionJuridica('');
 
 $objJunta = new clsJunta();
 $datosJunta = $objJunta->buscarTodos();
-$optionsJunta = optionsJunta($datosJunta);
+$optionsJunta = optionsJuntaSinTodos($datosJunta);
 
 $objValvula = new clsValvula();
 $datosValvula = $objValvula->buscarTodos();
@@ -143,29 +143,39 @@ $opciones = tablaDatosBuscar($listaSocios);
                         "&nocache=" + Math.random();
             }
             function registrar() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        if (xmlhttp.responseText == "No se pudo ingresar el terreno") {
-                            $.bootstrapGrowl(xmlhttp.responseText, {
-                                type: 'danger',
-                                align: 'right',
-                                stackup_spacing: 30,
-                                delay: 1500
-                            });
-                        } else {
-                            location.href = xmlhttp.responseText;
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            if (xmlhttp.responseText == "No se pudo ingresar el terreno") {
+                                $.bootstrapGrowl(xmlhttp.responseText, {
+                                    type: 'danger',
+                                    align: 'right',
+                                    stackup_spacing: 30,
+                                    delay: 1500
+                                });
+                            } else {
+                                location.href = xmlhttp.responseText;
+                            }
                         }
                     }
+                    xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPost());
+                } else {
+                    $.bootstrapGrowl("El código catastral y predial no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
                 }
-                xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPost());
+
             }
             function inicializar() {
                 var areaRiego = document.getElementById("txtAreaRiego");
@@ -176,6 +186,18 @@ $opciones = tablaDatosBuscar($listaSocios);
                 areaNoSusceptible.value = 0;
                 var codProvisional = document.getElementById("txtCodProvisional");
                 codProvisional.value = 0;
+            }
+
+            function validar() {
+                var codCatastral = document.getElementById('txtCodCatastral');
+                var codPredial = document.getElementById('txtCodPredial');
+                if (codCatastral.value == "") {
+                    return false
+                } else if (codPredial.value == "") {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         </script>
     </head>
@@ -225,31 +247,46 @@ $opciones = tablaDatosBuscar($listaSocios);
                             <label for="txCodCatastral" class="hidden-xs">
                                 <?php echo $array_ini['catastral'] ?>
                             </label>
-                            <input id="txtCodCatastral" name="txtCodCatastral" type="text" class="form-control" placeholder="Código Catastral" >
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtCodCatastral" name="txtCodCatastral" type="text" class="form-control" placeholder="Código Catastral" >
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtCodPredial" class="hidden-xs">
                                 <?php echo $array_ini['predial'] ?>
                             </label>
-                            <input id="txtCodPredial" name="txtCodPredial" type="text" class="form-control" placeholder="Código Predial">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtCodPredial" name="txtCodPredial" type="text" class="form-control" placeholder="Código Predial">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtAreaRiego" class="hidden-xs">
                                 <?php echo $array_ini['areaRiego'] ?>
                             </label>
-                            <input id="txtAreaRiego" name="txtAreaRiego" type="number" class="form-control" placeholder="Area con Riego">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtAreaRiego" name="txtAreaRiego" type="number" class="form-control" placeholder="Area con Riego">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtAreaSusceptible" class="hidden-xs">
                                 <?php echo $array_ini['areaSuceptibleRiego'] ?>
                             </label>
-                            <input id="txtAreaSusceptible" name="txtAreaSusceptible" type="number" class="form-control" placeholder="Area Susceptible de Riego">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtAreaSusceptible" name="txtAreaSusceptible" type="number" class="form-control" placeholder="Area Susceptible de Riego">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtAreaNoSusceptible" class="hidden-xs">
                                 <?php echo $array_ini['areaNoSuceptibleRiego'] ?>
                             </label>
-                            <input id="txtAreaNoSusceptible" name="txtAreaNoSusceptible" type="number" class="form-control" placeholder="Area Susceptible de Riego">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtAreaNoSusceptible" name="txtAreaNoSusceptible" type="number" class="form-control" placeholder="Area Susceptible de Riego">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtCondJuridica" class="hidden-xs">
@@ -267,7 +304,10 @@ $opciones = tablaDatosBuscar($listaSocios);
                             <label for="txtCodProvisional" class="hidden-xs">
                                 <?php echo $array_ini['codProvisional'] ?>
                             </label>
-                            <input id="txtCodProvisional" name="txtCodProvisional" type="text" class="form-control" placeholder="Código Provisional">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtCodProvisional" name="txtCodProvisional" type="text" class="form-control" placeholder="Código Provisional">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtJunta" class="hidden-xs">
@@ -297,20 +337,27 @@ $opciones = tablaDatosBuscar($listaSocios);
                             <label for="txtObservacion" class="hidden-xs">
                                 <?php echo $array_ini['observacion'] ?>
                             </label>
-                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación"></textarea>
+                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación <Opcional>"></textarea>
                         </div>
                     </div> 
 
                 </div> <!-- ./row -->
+                
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <?php echo $array_ini['camposrequeridos'] ?>
+                    </div>
+                </div>
 
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button name="operacion" value="registrar" type="button" class="btn btn-info" onclick="registrar()">
+                        <button name="operacion" value="registrar" type="button" class="btn btn-info" 
+                                onclick="registrar()" title="Registrar los datos de un terreno">
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['registrar'] ?>
                         </button>
-                        <button type="button" class="btn btn-default" onclick="resetear()">
+                        <button type="button" class="btn btn-default" onclick="resetear()" title="Resetear los campos">
                             <div class="glyphicon glyphicon-remove"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>

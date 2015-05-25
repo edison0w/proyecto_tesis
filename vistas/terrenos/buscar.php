@@ -18,7 +18,7 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
 $optionsCondJuridica = sectionCondicionJuridica();
 $objJunta = new clsJunta();
 $datosJunta = $objJunta->buscarTodos();
-$optionsJunta = optionsJunta($datosJunta);
+$optionsJunta = optionsJuntaSinTodos($datosJunta);
 
 $objValvula = new clsValvula();
 $datosValvula = $objValvula->buscarTodos();
@@ -40,6 +40,22 @@ $optionsModulo = optionsModulo($datosModulo);
         <!-- recursos javascript -->
         <script src="../../recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
+            function activarBotones() {
+                var btnActualizar = document.getElementById("btnActualizar");
+                btnActualizar.disabled = false;
+                var btnEliminar = document.getElementById("btnEliminar");
+                btnEliminar.disabled = false;
+                var btnCultivos = document.getElementById("btnCultivos");
+                btnCultivos.disabled = false;
+            }
+            function desactivarBotones() {
+                var btnActualizar = document.getElementById("btnActualizar");
+                btnActualizar.disabled = true;
+                var btnEliminar = document.getElementById("btnEliminar");
+                btnEliminar.disabled = true;
+                var btnCultivos = document.getElementById("btnCultivos");
+                btnCultivos.disabled = true;
+            }
             $(document).ready(function () {
                 $('.selectpicker').selectpicker({
                     showSubtext: true
@@ -62,6 +78,7 @@ $optionsModulo = optionsModulo($datosModulo);
                 xmlhttp.onreadystatechange = function () {
                     if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                         var jsonObj = JSON.parse(xmlhttp.responseText);
+                        activarBotones();
                         if (jsonObj) {
                             var codigo = document.getElementById("txtCodigo");
                             codigo.value = jsonObj.NUM_TERRENO;
@@ -93,6 +110,8 @@ $optionsModulo = optionsModulo($datosModulo);
                             $('#txtModulo').selectpicker('refresh');
                             var obs = document.getElementById("txtObservacion");
                             obs.value = jsonObj.OBS;
+
+                            asd
                         } else {
                             resetear();
                         }
@@ -132,25 +151,35 @@ $optionsModulo = optionsModulo($datosModulo);
                         "&nocache=" + Math.random();
             }
             function actualizar() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        $.bootstrapGrowl(xmlhttp.responseText, {
-                            type: 'info',
-                            align: 'right',
-                            stackup_spacing: 30,
-                            delay: 1500
-                        });
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                     }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            $.bootstrapGrowl(xmlhttp.responseText, {
+                                type: 'info',
+                                align: 'right',
+                                stackup_spacing: 30,
+                                delay: 1500
+                            });
+                        }
+                    }
+                    xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPostActualizar());
+                } else {
+                    $.bootstrapGrowl("El código catastral y predial no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
                 }
-                xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPostActualizar());
+
             }
             function resetear() {
                 var codigo = document.getElementById("txtCodigo");
@@ -186,6 +215,8 @@ $optionsModulo = optionsModulo($datosModulo);
                 var buscar = document.getElementById("txtBuscar");
                 buscar.value = "";
                 $('#txtBuscar').selectpicker('refresh');
+
+                desactivarBotones();
             }
             function cargarSesion() {
                 var numTerreno = document.getElementById('txtCodigo');
@@ -237,6 +268,17 @@ $optionsModulo = optionsModulo($datosModulo);
                 xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xmlhttp.send(formularioPostBuscar(numTerreno));
+            }
+            function validar() {
+                var codCatastral = document.getElementById('txtCodCatastral');
+                var codPredial = document.getElementById('txtCodPredial');
+                if (codCatastral.value == "") {
+                    return false
+                } else if (codPredial.value == "") {
+                    return false;
+                } else {
+                    return true;
+                }
             }
         </script>
     </head>
@@ -294,31 +336,46 @@ $optionsModulo = optionsModulo($datosModulo);
                             <label for="txCodCatastral" class="hidden-xs">
                                 <?php echo $array_ini['catastral'] ?>
                             </label>
-                            <input id="txtCodCatastral" name="txtCodCatastral" type="text" class="form-control" placeholder="Código Catastral" >
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtCodCatastral" name="txtCodCatastral" type="text" class="form-control" placeholder="Código Catastral" >
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtCodPredial" class="hidden-xs">
                                 <?php echo $array_ini['predial'] ?>
                             </label>
-                            <input id="txtCodPredial" name="txtCodPredial" type="text" class="form-control" placeholder="Código Predial">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtCodPredial" name="txtCodPredial" type="text" class="form-control" placeholder="Código Predial">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtAreaRiego" class="hidden-xs">
                                 <?php echo $array_ini['areaRiego'] ?>
                             </label>
-                            <input id="txtAreaRiego" name="txtAreaRiego" type="text" class="form-control" placeholder="Area con Riego">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtAreaRiego" name="txtAreaRiego" type="text" class="form-control" placeholder="Area con Riego">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtAreaSusceptible" class="hidden-xs">
                                 <?php echo $array_ini['areaSuceptibleRiego'] ?>
                             </label>
-                            <input id="txtAreaSusceptible" name="txtAreaSusceptible" type="tex" class="form-control" placeholder="Area Susceptible de Riego">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtAreaSusceptible" name="txtAreaSusceptible" type="tex" class="form-control" placeholder="Area Susceptible de Riego">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtAreaNoSusceptible" class="hidden-xs">
                                 <?php echo $array_ini['areaNoSuceptibleRiego'] ?>
                             </label>
-                            <input id="txtAreaNoSusceptible" name="txtAreaNoSusceptible" type="text" class="form-control" placeholder="Area Susceptible de Riego">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtAreaNoSusceptible" name="txtAreaNoSusceptible" type="text" class="form-control" placeholder="Area Susceptible de Riego">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtCondJuridica" class="hidden-xs">
@@ -336,7 +393,10 @@ $optionsModulo = optionsModulo($datosModulo);
                             <label for="txtCodProvisional" class="hidden-xs">
                                 <?php echo $array_ini['codProvisional'] ?>
                             </label>
-                            <input id="txtCodProvisional" name="txtCodProvisional" type="text" class="form-control" placeholder="Código Provisional">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">&nbsp;</span>
+                                <input id="txtCodProvisional" name="txtCodProvisional" type="text" class="form-control" placeholder="Código Provisional">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="txtJunta" class="hidden-xs">
@@ -375,19 +435,23 @@ $optionsModulo = optionsModulo($datosModulo);
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button type="button" name="operacion" value="actualizar" class="btn btn-info" onclick="actualizar()">
+                        <button id="btnActualizar" type="button" name="operacion" value="actualizar" 
+                                class="btn btn-info" onclick="actualizar()" disabled="true">
                             <div class="glyphicon glyphicon-floppy-disk"></div>
                             <?php echo $array_ini['actualizar'] ?>
                         </button>
-                        <button type="button" name="operacion" value="eliminar" class="btn btn-danger" onclick="eliminar()">
+                        <button id="btnEliminar" type="button" name="operacion" value="eliminar" 
+                                class="btn btn-danger" onclick="eliminar()" disabled="true">
                             <div class="glyphicon glyphicon-trash"></div>
                             <?php echo $array_ini['eliminar'] ?>
                         </button>
-                        <button type="button" name="operacion" value="terrenos" class="btn btn-success" onclick="location.href = '../cultivos/todos.php'">
+                        <button id="btnCultivos" type="button" name="operacion" value="terrenos" 
+                                class="btn btn-success" onclick="location.href = '../cultivos/todos.php'" disabled="true">
                             <div class="glyphicon glyphicon-globe"></div>
                             <?php echo $array_ini['cultivos'] ?>
                         </button>
-                        <button type="button" name="operacion" value="cancelar" class="btn btn-default" onclick="resetear()">
+                        <button id="btnCancelar" type="button" name="operacion" value="cancelar" 
+                                class="btn btn-default" onclick="resetear()">
                             <div class="glyphicon glyphicon-repeat"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>

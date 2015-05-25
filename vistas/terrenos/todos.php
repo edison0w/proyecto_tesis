@@ -191,7 +191,9 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
             <!-- Barra de Navegacion Izquierda-->
             <div class="row hidden-xs hidden-sm">
                 <div class="container">
-                    <button name="operacion" value="Nuevo" type="button" class="btn btn-info" onclick="location.href = 'registrar.php'">
+                    <button name="operacion" value="Nuevo" type="button" class="btn btn-info" 
+                            onclick="location.href = 'registrar.php'"
+                            title="Registrar un nuevo terreno">
                         <div class="glyphicon glyphicon-ok"></div>
                         <?php echo $array_ini['nuevo'] ?>
                     </button>

@@ -216,7 +216,7 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                             <label for="txtObservacion" class="hidden-xs">
                                 <?php echo $array_ini['observacion'] ?>
                             </label>
-                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación"></textarea>
+                            <textarea id="txtObservacion" name="txtObservacion" class="form-control" rows="4" placeholder="Observación <Opcional>"></textarea>
                         </div>
                     </div> 
 
@@ -225,11 +225,12 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button name="operacion" value="registrar" type="button" class="btn btn-info" onclick="registrar()">
+                        <button name="operacion" value="registrar" type="button" class="btn btn-info" 
+                                onclick="registrar()" title="Registrar los datos del cultivo">
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['registrar'] ?>
                         </button>
-                        <button type="button" class="btn btn-default" onclick="resetear()">
+                        <button type="button" class="btn btn-default" onclick="resetear()" title="Resetear los campos">
                             <div class="glyphicon glyphicon-remove"></div>
                             <?php echo $array_ini['cancelar'] ?>
                         </button>
