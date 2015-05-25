@@ -40,6 +40,14 @@ $opciones = tablaDatosBuscar($listaSocios);
         <!-- recursos javascript -->
         <script src="../../recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
+            function activarBotones() {
+                var btnRegistrar = document.getElementById("btnRegistrar");
+                btnRegistrar.disabled = false;
+            }
+            function desactivarBotones() {
+                var btnRegistrar = document.getElementById("btnRegistrar");
+                btnRegistrar.disabled = true;
+            }
             $(document).ready(function () {
                 $('.selectpicker').selectpicker({
                     showSubtext: true
@@ -67,6 +75,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                             cedulaNombres.value = jsonObj.CI + ", " + jsonObj.APELLIDO;
                             var codigo = document.getElementById("txtCodigo");
                             codigo.value = jsonObj.CODIGO;
+                            activarBotones();
                         } else {
                             //si se va a buscar como devuelve vacion la $_SESSION['socio']=new clsSocio()
                             resetear();
@@ -111,6 +120,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                 var buscar = document.getElementById("txtBuscar");
                 buscar.value = "";
                 $('#txtBuscar').selectpicker('refresh');
+                desactivarBotones();
 
             }
             function formularioPost() {
@@ -178,14 +188,20 @@ $opciones = tablaDatosBuscar($listaSocios);
 
             }
             function inicializar() {
-                var areaRiego = document.getElementById("txtAreaRiego");
-                areaRiego.value = 0;
-                var areaSusceptible = document.getElementById("txtAreaSusceptible");
-                areaSusceptible.value = 0;
-                var areaNoSusceptible = document.getElementById("txtAreaNoSusceptible");
-                areaNoSusceptible.value = 0;
-                var codProvisional = document.getElementById("txtCodProvisional");
-                codProvisional.value = 0;
+                /*
+                 var areaRiego = document.getElementById("txtAreaRiego");
+                 areaRiego.value = 0;
+                 var areaSusceptible = document.getElementById("txtAreaSusceptible");
+                 areaSusceptible.value = 0;
+                 var areaNoSusceptible = document.getElementById("txtAreaNoSusceptible");
+                 areaNoSusceptible.value = 0;
+                 var codProvisional = document.getElementById("txtCodProvisional");
+                 codProvisional.value = 0;
+                 */
+                var codigo = document.getElementById('txtCodigo');
+                if (codigo.value != 0) {
+                    activarBotones();
+                }
             }
 
             function validar() {
@@ -342,7 +358,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                     </div> 
 
                 </div> <!-- ./row -->
-                
+
                 <div class="row">
                     <div class="form-group col-xs-12">
                         <?php echo $array_ini['camposrequeridos'] ?>
@@ -352,8 +368,8 @@ $opciones = tablaDatosBuscar($listaSocios);
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button name="operacion" value="registrar" type="button" class="btn btn-info" 
-                                onclick="registrar()" title="Registrar los datos de un terreno">
+                        <button id="btnRegistrar" name="operacion" value="registrar" type="button" class="btn btn-info" 
+                                onclick="registrar()" title="Registrar los datos de un terreno" disabled="true">
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['registrar'] ?>
                         </button>
