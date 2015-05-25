@@ -21,14 +21,14 @@ if ($_POST['operacion'] == 'acceder') {
     if ($objUsuario->autenticar($usuario, $clave)) {
         $objRol->buscarXCodigo($objUsuario->getRol());
         if ($objRol->getRol() != "") {
-            // Usuario que se logea
-            $_SESSION['usuario'] = $objUsuario;
-            $_SESSION['rol'] = $objRol;
-            $_SESSION['socio'] = new clsSocio();
-            $_SESSION['terreno'] = new clsTerreno();
-            $_SESSION['cultivo'] = new clsCultivo();
+            $_SESSION['usuario'] = $objUsuario; // Usuario que se logea
+            $_SESSION['rol'] = $objRol; // Rol del usuario 
+            $_SESSION['socio'] = new clsSocio(); // Socios
+            $_SESSION['terreno'] = new clsTerreno(); // Terrenos
+            $_SESSION['cultivo'] = new clsCultivo(); // Cultivos
             $_SESSION['usu'] = new clsUsuario();
 
+            // Varibales del menu
             $_SESSION['mSocio'] = "";
             $_SESSION['mTerreno'] = "";
             $_SESSION['mCultivo'] = "";

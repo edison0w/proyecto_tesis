@@ -149,13 +149,12 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
                 if ($_SESSION['socio']->getCodigo() != 0) {
                     echo "<div class='col-xs-12'>"
                     . "<div class='form-group'>"
-                    . "Socio : " . $_SESSION['socio']->getApellido() . ""
+                    . "<span style='font-weight: bold'>Socio : </span>" . $_SESSION['socio']->getApellido() . ""
                     . "</div>"
                     . "</div>";
                 }
                 ?>
             </div>
-            
             
             <table id="tblTerrenos" class="table table-striped table-bordered table-hover table-condensed table-responsive" >
                 <thead>

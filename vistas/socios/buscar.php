@@ -213,7 +213,7 @@ $opciones = tablaDatosBuscar($listaSocios);
                 }
 
             }
-            function cargarSesion() {
+            function inicializar() {
                 var codSocio = document.getElementById('txtCodigo');
                 var xmlhttp;
                 if (window.XMLHttpRequest) {
@@ -267,6 +267,8 @@ $opciones = tablaDatosBuscar($listaSocios);
                             var obs = document.getElementById("txtObservacion");
                             obs.value = jsonObj.OBS;
                             obs.disabled = false;
+                            
+                            activarBotones();
                         }
 
                     }
@@ -362,7 +364,7 @@ $opciones = tablaDatosBuscar($listaSocios);
             }
         </script>
     </head>
-    <body onload="cargarSesion()">
+    <body onload="inicializar()">
         <?php include '../../recursos/inc/menu.php'; ?>
 
         <!-- texto oculto / codigo socio sesion -->

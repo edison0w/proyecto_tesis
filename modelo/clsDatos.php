@@ -5,14 +5,14 @@ class clsDatos {
     private $conexion;
 
     public function __construct() {
-        $servidor = "201.218.45.188";
-        $usuario = "evilla";
-        $clave = "Passw0rd";
-        $base = "jurech_tesis";
-//        $servidor = "localhost";
-//        $usuario = "root";
-//        $clave = "";
-//        $base = "jurechgis";
+//        $servidor = "201.218.45.188";
+//        $usuario = "evilla";
+//        $clave = "Passw0rd";
+//        $base = "jurech_tesis";
+        $servidor = "localhost";
+        $usuario = "root";
+        $clave = "";
+        $base = "jurechgis";
         $this->conexion = mysqli_connect($servidor, $usuario, $clave, $base);
     }
 

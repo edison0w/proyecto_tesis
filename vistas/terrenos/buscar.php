@@ -218,7 +218,7 @@ $optionsModulo = optionsModulo($datosModulo);
 
                 desactivarBotones();
             }
-            function cargarSesion() {
+            function inicializar() {
                 var numTerreno = document.getElementById('txtCodigo');
                 var xmlhttp;
                 if (window.XMLHttpRequest) {
@@ -260,6 +260,8 @@ $optionsModulo = optionsModulo($datosModulo);
                             $('#txtModulo').selectpicker('refresh');
                             var obs = document.getElementById("txtObservacion");
                             obs.value = jsonObj.OBS;
+                            
+                            activarBotones();
                         } else {
                             resetear();
                         }
@@ -282,7 +284,7 @@ $optionsModulo = optionsModulo($datosModulo);
             }
         </script>
     </head>
-    <body onload="cargarSesion()">
+    <body onload="inicializar()">
         <?php include __DIR__ . '/../../recursos/inc/menu.php'; ?>
 
         <!-- texto oculto / codigo terreno sesion -->

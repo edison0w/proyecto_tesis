@@ -1,10 +1,16 @@
 <?php
 require __DIR__ . "/../../modelo/clsUsuario.php";
 require __DIR__ . "/../../modelo/clsRol.php";
+require __DIR__ . '/../../modelo/clsSocio.php';
+require __DIR__ . '/../../modelo/clsTerreno.php';
+require __DIR__ . '/../../modelo/clsCultivo.php';
 session_start();
 $_SESSION['mSocio'] = "";
 $_SESSION['mTerreno'] = "active";
 $_SESSION['mCultivo'] = "";
+$_SESSION['socio'] = new clsSocio();
+$_SESSION['terreno'] = new clsTerreno();
+$_SESSION['cultivo'] = new clsCultivo();
 $array_ini = parse_ini_file("../../recursos/properties.ini");
 $direccion = $array_ini['protocolo'] . $_SERVER['HTTP_HOST'] . $array_ini['proyecto'];
 ?>
