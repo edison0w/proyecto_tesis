@@ -110,8 +110,6 @@ $optionsModulo = optionsModulo($datosModulo);
                             $('#txtModulo').selectpicker('refresh');
                             var obs = document.getElementById("txtObservacion");
                             obs.value = jsonObj.OBS;
-
-                            asd
                         } else {
                             resetear();
                         }
@@ -288,7 +286,7 @@ $optionsModulo = optionsModulo($datosModulo);
         <?php include __DIR__ . '/../../recursos/inc/menu.php'; ?>
 
         <!-- texto oculto / codigo terreno sesion -->
-        <input type="hidden" id="txtCodigo" value="<?php echo $_SESSION['terreno']->getNum_terreno() ?>">
+        <input type="text" id="txtCodigo" value="<?php echo $_SESSION['terreno']->getNum_terreno() ?>">
 
         <div id="margen-top" class="container">
 

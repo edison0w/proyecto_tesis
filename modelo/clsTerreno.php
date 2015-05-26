@@ -259,8 +259,6 @@ class clsTerreno {
         $objDatos->cerrarConexion();
         return $lista;
     }
-    
-    
 
     public function eliminar() {
         $exito = false;
@@ -272,7 +270,7 @@ class clsTerreno {
         $objDatos->cerrarconexion();
         return $exito;
     }
-    
+
     public function buscarXNumTerreneo() {
         $objDatos = new clsDatos();
         $lista = array();
@@ -289,10 +287,11 @@ class clsTerreno {
         return $lista;
     }
 
-    public function buscarXSocio($codigo) {
+    // buscar al Terreno por el codigo del Socio
+    public function buscarXSocio($codigo_socio) {
         $objDatos = new clsDatos();
         $lista = array();
-        $sql = "select * from terreno t where t.CODIGO=$codigo";
+        $sql = "select * from terreno t where t.CODIGO=$codigo_socio";
         if ($datos_desordenados = $objDatos->consultar($sql)) {
             $index = 0;
             while ($row = $objDatos->registros($datos_desordenados)) {
@@ -304,6 +303,25 @@ class clsTerreno {
         $objDatos->cerrarConexion();
         return $lista;
     }
+
+    // buscar al Terreno por el numero de terreno
+//    public function buscarXSocioRetorno($num_terreno) {
+//        $objDatos = new clsDatos();
+//        $objSocio = clsSocio();
+//        $sql = "select s.`CODIGO`, s.`CI`, s.`APELLIDO`, s.`OBS`, s.`GENERO`, s.`COD_BARRA`, s.`DIRECCION`, s.`TELEFONO`, s.`CELULAR`, s.`EMAIL`, s.`ESTADO_CIVIL`, s.`NOMBRE_CONYUGE`, s.`FOTO`, s.`COD_USUARIO`, s.`FECHA_ACTUALIZACION`, s.`ESTADO`, s.`SECTOR`, s.`TIPO` from socio inner join terreno "
+//        ."on socio.CODIGO = terreno.CODIGO "
+//        ."where terreno.NUM_TERRENO = $num_terreno";
+//        if ($datos_desordenados = $objDatos->consultar($sql)) {
+//            $index = 0;
+//            while ($row = $objDatos->registros($datos_desordenados)) {
+//                $objSocio = $row;
+//                $index++;
+//            }
+//        }
+//        $objDatos->cerrarConsulta($datos_desordenados);
+//        $objDatos->cerrarConexion();
+//        return $objSocio;
+//    }
 
     public function buscarTodosSocioTerrenos() {
         $objDatos = new clsDatos();
@@ -356,6 +374,5 @@ class clsTerreno {
         $objDatos->cerrarConexion();
         return $registros;
     }
-    
 
 }

@@ -67,7 +67,7 @@ function tablaDatosUsuarios($lista) {
     return $tabla;
 }
 
-//TABLA DATOS TERRENOS <td>" . $row['AREAN'] . "</td>
+//TABLA DATOS TERRENOS SIN <td>" . $row['AREAN'] . "</td>
 function tablaDatosTerrenos($lista) {
     $tabla = "";
     $index = 1;

@@ -82,4 +82,5 @@ if ($_POST['operacion'] == "nuevo") {
     $objTerreno->setNum_terreno($_POST['txtNumTerreno']);
     $objTerreno->buscarXNumTerreneo();
     $_SESSION['terreno'] = $objTerreno;
+    
 }

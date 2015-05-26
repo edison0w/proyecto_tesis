@@ -113,12 +113,12 @@ $tablaCultivos = tablaDatosTerrenoAsignarCultivos($lista);
                 if ($_SESSION['socio']->getCodigo() != 0) {
                     echo "<div class='col-xs-12'>"
                     . "<div class='form-group'>"
-                    . "Socio : " . $_SESSION['socio']->getApellido() . ""
+                    . "<span style='font-weight: bold'>Socio : </span>" . $_SESSION['socio']->getApellido() . ""
                     . "</div>"
                     . "</div>";
                     echo "<div class='col-xs-12'>"
                     . "<div class='form-group'>"
-                    . "Terreno : " . $_SESSION['terreno']->getNum_terreno() . ""
+                    . "<span style='font-weight: bold'>Terreno : </span>" . $_SESSION['terreno']->getNum_terreno() . ""
                     . "</div>"
                     . "</div>";
                     
