@@ -56,7 +56,6 @@ $tablaTerrenos = tablaDatosTerrenos($lista);
                             "sortDescending": ": activate to sort column descending"
                         },
                     }
-
                 });
                 $('#confirmacion').on('shown.bs.modal', function () {
                     $('#btnNo').focus()

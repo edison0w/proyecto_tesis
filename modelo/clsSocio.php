@@ -416,11 +416,12 @@ class clsSocio {
     public function buscarXNumTerreno($numTerreno) {
         $exito = false;
         $objDatos = new clsDatos();
-        $sql = "select s.CI, s.APELLIDO, s.OBS, s.GENERO, s.COD_BARRA, s.DIRECCION, s.TELEFONO, s.CELULAR, s.EMAIL, s.ESTADO_CIVIL,"
+        $sql = "select s.CODIGO, s.CI, s.APELLIDO, s.OBS, s.GENERO, s.COD_BARRA, s.DIRECCION, s.TELEFONO, s.CELULAR, s.EMAIL, s.ESTADO_CIVIL,"
                 . "s.NOMBRE_CONYUGE, s.FOTO, s.COD_USUARIO, s.FECHA_ACTUALIZACION, s.ESTADO, s.SECTOR, s.TIPO "
                 . "from socio s inner join terreno t on s.CODIGO = t.CODIGO where t.NUM_TERRENO = " . $numTerreno;
         $datos_desordenados = $objDatos->consultar($sql);
         if ($registros = $objDatos->registros($datos_desordenados)) {
+            $this->codigo = $registros['CODIGO'];
             $this->ci = $registros['CI'];
             $this->apellido = $registros['APELLIDO'];
             $this->obs = $registros['OBS'];

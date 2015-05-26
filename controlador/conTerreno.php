@@ -83,4 +83,8 @@ if ($_POST['operacion'] == "nuevo") {
     $objTerreno->buscarXNumTerreneo();
     $_SESSION['terreno'] = $objTerreno;
     
+    $objSocio = new clsSocio();
+    $objSocio->buscarXNumTerreno($objTerreno->getNum_terreno());
+    $_SESSION['socio'] = $objSocio;
+    
 }
