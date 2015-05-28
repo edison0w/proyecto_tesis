@@ -40,7 +40,7 @@ if ($_POST['operacion'] == "pdf") {
     } else {
         $j = "= " . $_POST['txtJunta'];
     }
-    
+
     $pdf = new PDF();
     $pdf->AliasNbPages();
     $pdf->AddPage();
@@ -52,7 +52,7 @@ if ($_POST['operacion'] == "pdf") {
     // TABLA DE DATOS
     $w = array(28, 90, 30, 40);
     // Cabeceras
-    $header = array( html_entity_decode('Cédula'), 'Nombres', 'Teléfono', 'Persona');
+    $header = array(html_entity_decode('Cédula'), 'Nombres', 'Teléfono', 'Persona');
     for ($i = 0; $i < count($header); $i++)
         $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C');
     $pdf->Ln();
@@ -122,9 +122,9 @@ if ($_POST['operacion'] == "pdfSocio") {
     $pdf->Cell($espacio, $altura, $objSocio->getDireccion());
 
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell($ancho2, $altura, "Genero ");
+    $pdf->Cell($ancho2, $altura, "Género ");
     $pdf->SetFont('Arial', '', 10);
-    $pdf->Cell($ancho, $altura, $objSocio->getGenero());
+    $pdf->Cell($ancho, $altura, $objSocio->getGenero() == "M" ? "Maculino" : "Femenino");
 
     $pdf->Ln();
     $pdf->SetFont('Arial', 'B', 10);
@@ -150,14 +150,14 @@ if ($_POST['operacion'] == "pdfSocio") {
     $pdf->Ln();
     $pdf->Ln();
     $pdf->SetFont('Arial', 'B', 10);
-    $pdf->Cell($ancho, $altura, "Terrenos");
-    $pdf->Ln();
+//    $pdf->Cell($ancho, $altura, "Terrenos");
+//    $pdf->Ln();
     $objTerreno = new clsTerreno();
     $data = $objTerreno->buscarXSocio($cod);
     //TABLA DE DATOS
     $w = array(30, 30, 35, 40, 40);
     // Cabeceras
-    $header = array('Terreno', 'Area con Riego', 'Area Susp. Riego', 'Area No. Susp a Riego', 'Area Total');
+    $header = array('Terreno', 'Área con Riego', 'Área Susp. Riego', 'Área No. Susp a Riego', 'Área Total');
     for ($i = 0; $i < count($header); $i++)
         $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C');
     $pdf->Ln();
@@ -171,17 +171,17 @@ if ($_POST['operacion'] == "pdfSocio") {
         $pdf->Ln();
         $cultivos = new clsAsignarCultivo();
         $cultivos = $cultivos->buscarXTerreno($row[0]);
+        $headerCultivos = array('', 'Cultivo', '% Consecha', 'Área', 'Fecha');
+        for ($i = 0; $i < count($headerCultivos); $i++)
+            $pdf->Cell($w[$i], 7, $headerCultivos[$i], 1, 0, 'C');
+        $pdf->Ln();
         foreach ($cultivos as $fila) {
-            $pdf->SetFont('Arial', 'B', 10);
-            $pdf->Cell($w[0], 6, "Cultivo", 0, 0, 'C');
-            $pdf->SetFont('Arial', '', 10);
-            $pdf->Cell($w[1], 6, $fila[14], 0, 0, 'C');
-            
-            $pdf->SetFont('Arial', 'B', 10);
-            $pdf->Cell($w[2], 6, "Area", 0, 0, 'C');
-            $pdf->SetFont('Arial', '', 10);
-            $pdf->Cell($w[3], 6, $fila[4], 0, 0, 'C');
-            
+
+            $pdf->Cell($w[0], 6, "", 'LRBT', 0, 'C');
+            $pdf->Cell($w[1], 6, $fila[14], 'LRBT', 0, 'C');
+            $pdf->Cell($w[2], 6, $fila[3], 'LRBT', 0, 'C');
+            $pdf->Cell($w[3], 6, $fila[4], 'LRBT', 0, 'C');
+            $pdf->Cell($w[3], 6, $fila[12], 'LRBT', 0, 'C');
             $pdf->Ln();
         }
     }

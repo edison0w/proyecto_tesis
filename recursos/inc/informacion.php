@@ -15,7 +15,7 @@
             <img src="<?php echo "http://" . $_SERVER['HTTP_HOST'] ?>/jurechgis/recursos/img/jurech.jpg">
             <?php echo "http://" . $_SERVER['HTTP_HOST']?>/jurechgis/recursos/img/jurech.jpg"
             <div class="carousel-caption">
-                Junta de General de Usuarios Chambo - Guano
+                Junta General de Riego Chambo - Guano
             </div>
         </div>
         <div class="item">
