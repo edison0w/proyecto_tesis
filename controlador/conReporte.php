@@ -155,35 +155,40 @@ if ($_POST['operacion'] == "pdfSocio") {
     $objTerreno = new clsTerreno();
     $data = $objTerreno->buscarXSocio($cod);
     //TABLA DE DATOS
-    $w = array(30, 30, 35, 40, 40);
+    $w = array(10, 30, 30, 35, 40, 40);
     // Cabeceras
-    $header = array('Terreno', 'Área con Riego', 'Área Susp. Riego', 'Área No. Susp a Riego', 'Área Total');
+    $header = array('#', 'Terreno', 'Área con Riego', 'Área Susp. Riego', 'Área No. Susp a Riego', 'Área Total');
     for ($i = 0; $i < count($header); $i++)
         $pdf->Cell($w[$i], 7, $header[$i], 1, 0, 'C');
     $pdf->Ln();
     $pdf->SetFont('Arial', '', 10);
+    $count = 1;
     foreach ($data as $row) {
-        $pdf->Cell($w[0], 6, $row[0], 'LRBT', 0, 'C');
-        $pdf->Cell($w[1], 6, $row[6], 'LRBT', 0, 'C');
-        $pdf->Cell($w[2], 6, $row[7], 'LRBT', 0, 'C');
-        $pdf->Cell($w[3], 6, $row[8], 'LRBT', 0, 'C');
-        $pdf->Cell($w[3], 6, $row[12], 'LRBT', 0, 'C');
+        $pdf->Cell($w[0], 6, $count, 'LRBT', 0, 'C');
+        $pdf->Cell($w[1], 6, $row[0], 'LRBT', 0, 'C');
+        $pdf->Cell($w[2], 6, $row[6], 'LRBT', 0, 'C');
+        $pdf->Cell($w[3], 6, $row[7], 'LRBT', 0, 'C');
+        $pdf->Cell($w[4], 6, $row[8], 'LRBT', 0, 'C');
+        $pdf->Cell($w[5], 6, $row[12], 'LRBT', 0, 'C');
         $pdf->Ln();
+        $pdf->Ln();
+        $count++;
         $cultivos = new clsAsignarCultivo();
         $cultivos = $cultivos->buscarXTerreno($row[0]);
-        $headerCultivos = array('', 'Cultivo', '% Consecha', 'Área', 'Fecha');
+        $headerCultivos = array('', 'Cultivo', '% Consecha', 'Área', 'Fecha', '');
         for ($i = 0; $i < count($headerCultivos); $i++)
             $pdf->Cell($w[$i], 7, $headerCultivos[$i], 1, 0, 'C');
         $pdf->Ln();
         foreach ($cultivos as $fila) {
-
             $pdf->Cell($w[0], 6, "", 'LRBT', 0, 'C');
             $pdf->Cell($w[1], 6, $fila[14], 'LRBT', 0, 'C');
             $pdf->Cell($w[2], 6, $fila[3], 'LRBT', 0, 'C');
             $pdf->Cell($w[3], 6, $fila[4], 'LRBT', 0, 'C');
-            $pdf->Cell($w[3], 6, $fila[12], 'LRBT', 0, 'C');
+            $pdf->Cell($w[4], 6, $fila[12], 'LRBT', 0, 'C');
+            $pdf->Cell($w[5], 6, "", 'LRBT', 0, 'C');
             $pdf->Ln();
         }
+        $pdf->Ln();
     }
     // Línea de cierre
     //$pdf->Cell(array_sum($w), 0, '', 'T');
