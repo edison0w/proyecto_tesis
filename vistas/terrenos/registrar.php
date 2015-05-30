@@ -121,7 +121,6 @@ $opciones = tablaDatosBuscar($listaSocios);
                 buscar.value = "";
                 $('#txtBuscar').selectpicker('refresh');
                 desactivarBotones();
-
             }
             function formularioPost() {
                 var codigo = document.getElementById('txtCodigo');

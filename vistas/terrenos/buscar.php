@@ -258,7 +258,7 @@ $optionsModulo = optionsModulo($datosModulo);
                             $('#txtModulo').selectpicker('refresh');
                             var obs = document.getElementById("txtObservacion");
                             obs.value = jsonObj.OBS;
-                            
+
                             activarBotones();
                         } else {
                             resetear();
@@ -279,6 +279,28 @@ $optionsModulo = optionsModulo($datosModulo);
                 } else {
                     return true;
                 }
+            }
+            function cultivos() {
+                var xmlhttp;
+                numTerreno = document.getElementById("txtCodigo");
+                if (window.XMLHttpRequest) {
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        location.href = '../cultivos/todos.php';
+                    }
+                }
+                xmlhttp.open("POST", "../../controlador/conTerreno.php", true);
+                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xmlhttp.send(formularioPost('nuevo'));
+            }
+            function formularioPost(operacion) {
+                return "txtNumTerreno=" + encodeURIComponent(numTerreno.value) +
+                        "&operacion=" + operacion +
+                        "&nocache=" + Math.random();
             }
         </script>
     </head>
@@ -446,7 +468,7 @@ $optionsModulo = optionsModulo($datosModulo);
                             <?php echo $array_ini['eliminar'] ?>
                         </button>
                         <button id="btnCultivos" type="button" name="operacion" value="terrenos" 
-                                class="btn btn-success" onclick="location.href = '../cultivos/todos.php'" disabled="true">
+                                class="btn btn-success" onclick="cultivos()" disabled="true">
                             <div class="glyphicon glyphicon-globe"></div>
                             <?php echo $array_ini['cultivos'] ?>
                         </button>

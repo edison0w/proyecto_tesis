@@ -29,6 +29,14 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
         <!-- recursos javascript -->
         <script src="../../recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
+            function activarBotones() {
+                var btnRegistrar = document.getElementById("btnRegistrar");
+                btnRegistrar.disabled = false;
+            }
+            function desactivarBotones() {
+                var btnRegistrar = document.getElementById("btnRegistrar");
+                btnRegistrar.disabled = true;
+            }
             $(document).ready(function () {
                 $("#txtPorcentaje").slider({
                     tooltip: 'show',
@@ -108,6 +116,7 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                             codigoTerreno.value = jsonObj.NUM_TERRENO;
                             var codigo = document.getElementById('txtSocio');
                             codigo.value = jsonObj.NUM_TERRENO + ", " + jsonObj.CI + ", " + jsonObj.APELLIDO;
+                            activarBotones();
                         } else {
                             resetear();
                         }
@@ -117,9 +126,20 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xmlhttp.send(formularioPostBuscar(numTerreno));
             }
+            function resetear() {
+                
+                desactivarBotones();
+            }
+            
+            function inicializar() {
+                var codigo = document.getElementById('txtCodigo');
+                if (codigo.value != 0) {
+                    activarBotones();
+                }
+            }
         </script>
     </head>
-    <body>
+    <body onload="inicializar()">
         <?php include __DIR__ . '/../../recursos/inc/menu.php'; ?>
         <!-- texto oculto / codigo terreno sesion -->
         <input type="hidden" id="txtCodigo" value="<?php echo $_SESSION['terreno']->getNum_terreno() ?>">
@@ -225,8 +245,8 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button name="operacion" value="registrar" type="button" class="btn btn-info" 
-                                onclick="registrar()" title="Registrar los datos del cultivo">
+                        <button id="btnRegistrar" name="operacion" value="registrar" type="button" class="btn btn-info" 
+                                onclick="registrar()" title="Registrar los datos del cultivo" disabled="true">
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['registrar'] ?>
                         </button>
