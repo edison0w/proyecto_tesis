@@ -171,21 +171,22 @@ if ($_POST['operacion'] == "pdfSocio") {
         $pdf->Cell($w[4], 6, $row[8], 'LRBT', 0, 'C');
         $pdf->Cell($w[5], 6, $row[12], 'LRBT', 0, 'C');
         $pdf->Ln();
-        $pdf->Ln();
         $count++;
         $cultivos = new clsAsignarCultivo();
         $cultivos = $cultivos->buscarXTerreno($row[0]);
+        $pdf->SetFont('Arial', 'B', 10);
         $headerCultivos = array('', 'Cultivo', '% Consecha', 'Área', 'Fecha', '');
         for ($i = 0; $i < count($headerCultivos); $i++)
-            $pdf->Cell($w[$i], 7, $headerCultivos[$i], 1, 0, 'C');
+            $pdf->Cell($w[$i], 7, $headerCultivos[$i], $i == 0  || $i == count($headerCultivos)-1 ? 0 : 1, 0, 'C');
         $pdf->Ln();
+        $pdf->SetFont('Arial', '', 10);
         foreach ($cultivos as $fila) {
-            $pdf->Cell($w[0], 6, "", 'LRBT', 0, 'C');
+            $pdf->Cell($w[0], 6, "", 0, 0, 'C');
             $pdf->Cell($w[1], 6, $fila[14], 'LRBT', 0, 'C');
             $pdf->Cell($w[2], 6, $fila[3], 'LRBT', 0, 'C');
             $pdf->Cell($w[3], 6, $fila[4], 'LRBT', 0, 'C');
             $pdf->Cell($w[4], 6, $fila[12], 'LRBT', 0, 'C');
-            $pdf->Cell($w[5], 6, "", 'LRBT', 0, 'C');
+            $pdf->Cell($w[5], 6, "", 0, 0, 'C');
             $pdf->Ln();
         }
         $pdf->Ln();

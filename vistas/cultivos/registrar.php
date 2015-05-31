@@ -93,7 +93,6 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                 xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                 xmlhttp.send(formularioPost());
             }
-
             function formularioPostBuscar(numTerreno) {
                 return "txtNumTerreno=" + encodeURIComponent(numTerreno.value) +
                         "&operacion=" + encodeURIComponent('buscar') +
