@@ -69,29 +69,38 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                         "&nocache=" + Math.random();
             }
             function registrar() {
-                var xmlhttp;
-                if (window.XMLHttpRequest) {
-                    xmlhttp = new XMLHttpRequest();
-                } else {
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        if (xmlhttp.responseText == "No se pudo ingresar el cultivo") {
-                            $.bootstrapGrowl(xmlhttp.responseText, {
-                                type: 'danger',
-                                align: 'right',
-                                stackup_spacing: 30,
-                                delay: 1500
-                            });
-                        } else {
-                            location.href = xmlhttp.responseText;
+                if (validar()) {
+                    var xmlhttp;
+                    if (window.XMLHttpRequest) {
+                        xmlhttp = new XMLHttpRequest();
+                    } else {
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                            if (xmlhttp.responseText == "No se pudo ingresar el cultivo") {
+                                $.bootstrapGrowl(xmlhttp.responseText, {
+                                    type: 'danger',
+                                    align: 'right',
+                                    stackup_spacing: 30,
+                                    delay: 1500
+                                });
+                            } else {
+                                location.href = xmlhttp.responseText;
+                            }
                         }
                     }
+                    xmlhttp.open("POST", "../../controlador/conAsignarCultivo.php", true);
+                    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xmlhttp.send(formularioPost());
+                } else {
+                    $.bootstrapGrowl("La edad al registro no pueden ir en blanco", {
+                        type: 'danger',
+                        align: 'right',
+                        stackup_spacing: 30,
+                        delay: 1500
+                    });
                 }
-                xmlhttp.open("POST", "../../controlador/conAsignarCultivo.php", true);
-                xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                xmlhttp.send(formularioPost());
             }
             function formularioPostBuscar(numTerreno) {
                 return "txtNumTerreno=" + encodeURIComponent(numTerreno.value) +
@@ -126,15 +135,20 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                 xmlhttp.send(formularioPostBuscar(numTerreno));
             }
             function resetear() {
-                
                 desactivarBotones();
             }
-            
             function inicializar() {
                 var codigo = document.getElementById('txtCodigo');
                 if (codigo.value != 0) {
                     activarBotones();
                 }
+            }
+            function validar() {
+                var edad = document.getElementById('txtEdadAlRegistro');
+                if (edad.value == "") {
+                    return false
+                }
+                return true
             }
         </script>
     </head>
@@ -211,7 +225,10 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                             <label for="txtEdadAlRegistro" class="hidden-xs">
                                 <?php echo $array_ini['edadAlRegistro'] ?>
                             </label>
-                            <input id="txtEdadAlRegistro" name="txtEdadAlRegistro" type="number" class="form-control" placeholder="Edad al Registro (dias)">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="sizing-addon1">*</span>
+                                <input id="txtEdadAlRegistro" name="txtEdadAlRegistro" type="number" class="form-control" placeholder="Edad al Registro (dias)">
+                            </div>
                         </div>
 
                     </div>
@@ -240,6 +257,12 @@ $opciones = tablaDatosBuscarTerreno($listaSocioTerrenos);
                     </div> 
 
                 </div> <!-- ./row -->
+
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <?php echo $array_ini['camposrequeridos'] ?>
+                    </div>
+                </div>
 
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">

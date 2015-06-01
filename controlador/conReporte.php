@@ -2,6 +2,7 @@
 
 require __DIR__ . "/../modelo/clsSocio.php";
 require __DIR__ . "/../modelo/clsTerreno.php";
+require __DIR__ . "/../modelo/clsJunta.php";
 require __DIR__ . "/../modelo/clsAsignarCultivo.php";
 require('../recursos/pdf/fpdf.php');
 
@@ -35,16 +36,23 @@ class PDF extends FPDF {
 
 if ($_POST['operacion'] == "pdf") {
 
+    $nombre_junta = "";
+
     if ($_POST['txtJunta'] == "" || $_POST['txtJunta'] == -1) {
         $j = "!= -1";
     } else {
         $j = "= " . $_POST['txtJunta'];
+        $objJunta = new clsJunta();
+        $objJunta->buscarXCodigo($j);
+        $nombre_junta = "JUNTA " . $objJunta->getSector_nombre();
     }
-
     $pdf = new PDF();
     $pdf->AliasNbPages();
     $pdf->AddPage();
     $pdf->SetFont('Arial', 'B', 10);
+    $pdf->Cell(80);
+    $pdf->Cell(30, 10, $nombre_junta, 0, 0, "C");
+    $pdf->Ln();
     $pdf->Cell(80);
     $pdf->Cell(30, 10, "Lista de Socios ", 0, 0, "C");
     $pdf->Ln();
@@ -177,7 +185,7 @@ if ($_POST['operacion'] == "pdfSocio") {
         $pdf->SetFont('Arial', 'B', 10);
         $headerCultivos = array('', 'Cultivo', '% Consecha', 'Área', 'Fecha', '');
         for ($i = 0; $i < count($headerCultivos); $i++)
-            $pdf->Cell($w[$i], 7, $headerCultivos[$i], $i == 0  || $i == count($headerCultivos)-1 ? 0 : 1, 0, 'C');
+            $pdf->Cell($w[$i], 7, $headerCultivos[$i], $i == 0 || $i == count($headerCultivos) - 1 ? 0 : 1, 0, 'C');
         $pdf->Ln();
         $pdf->SetFont('Arial', '', 10);
         foreach ($cultivos as $fila) {

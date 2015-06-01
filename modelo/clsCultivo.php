@@ -101,7 +101,7 @@ class clsCultivo {
     public function buscarTodos() {
         $objDatos = new clsDatos();
         $lista = array();
-        $sql = "select * from cultivo";
+        $sql = "select * from cultivo order by NOMBRE";
         if ($datos_desordenados = $objDatos->consultar($sql)) {
             $index = 0;
             while ($row = $objDatos->registros($datos_desordenados)) {

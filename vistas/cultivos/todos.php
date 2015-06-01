@@ -102,7 +102,7 @@ $tablaCultivos = tablaDatosTerrenoAsignarCultivos($lista);
     <body>
         <?php include '../../recursos/inc/menu.php'; ?>
 
-        <div id="margen-top" class="container">
+        <div id="margen-top" class="container" >
 
             <div class="row">
                 <div id="text_color_accent" class="col-xs-12">
@@ -130,7 +130,7 @@ $tablaCultivos = tablaDatosTerrenoAsignarCultivos($lista);
                     <tr>
                         <th><?php echo $array_ini['cultivo'] ?></th>
                         <th><?php echo $array_ini['porcentaje'] ?></th>
-                        <th><?php echo $array_ini['area'] ?></th>
+                        <th style='text-align: center'><?php echo $array_ini['fecha'] ?></th>
                         <th><?php echo $array_ini['tipoRiego'] ?></th>
                         <th><?php echo $array_ini['op'] ?></th>
                     </tr>

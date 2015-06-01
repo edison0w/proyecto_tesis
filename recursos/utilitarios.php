@@ -30,7 +30,7 @@ function tablaDatosSocios($lista) {
                         <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                 </button>
                 
-                <input type='hidden' id='txtCodSocio' name='txtCodSocio' value='".$row['CODIGO']."' />
+                <input type='hidden' id='txtCodSocio' name='txtCodSocio' value='" . $row['CODIGO'] . "' />
                 <button type='submit' class='btn-link' id='operacion' name='operacion' value='pdfSocio' title='Generar un reporte del Socio'> 
                         <span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span>
                 </button>
@@ -120,12 +120,23 @@ function tablaDatosTerrenosSocio($lista) {
 function tablaDatosTerrenoAsignarCultivos($lista) {
     $tabla = "";
     $index = 1;
+    $tp = "";
     foreach ($lista as $row) {
+        switch ($row['TIPO_RIEGO']) {
+            case "A": $tp = "Aspersión";
+                break;
+            case "G": $tp = "Goteo";
+                break;
+            case "Gr": $tp = "Gravedad";
+                break;
+            case "NA": $tp = "Otro";
+                break;
+        }
         $tabla .= "<tr>
                 <td>" . $row['NOMBRE'] . "</td>
                 <td>" . $row['PORCENTAJE'] . "</td>
-                <td>" . $row['AREA'] . "</td>
-                <td>" . $row['TIPO_RIEGO'] . "</td>
+                <td style='text-align: center'>" . $row['FECHA_ACTUALIZACION'] . "</td>
+                <td>" . $tp . "</td>
                 <td class='text-center'>" .
                 "<button type='button' class='btn-link' value='" . $row['NUMERO'] . "' onclick='actualizar(this.value)' title='Editar cultivo'> 
                         <span class='glyphicon glyphicon-pencil' aria-hidden='true'></span>
@@ -192,9 +203,6 @@ function tablaDatosBuscarTerreno($lista) {
 function optionsJunta($lista) {
     $tabla = "";
     $index = 1;
-    $tabla .= "<option value=''>"
-            . "Seleccione una Junta" .
-            "</option>";
     $tabla .= "<option value='-1'>"
             . "TODOS" .
             "</option>";

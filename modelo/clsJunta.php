@@ -51,7 +51,7 @@ class clsJunta {
     public function buscarTodos() {
         $objDatos = new clsDatos();
         $lista = array();
-        $sql = "select * from junta";
+        $sql = "select * from junta order by SECTOR_NOMBRE";
         if ($datos_desordenados = $objDatos->consultar($sql)) {
             $index = 0;
             while ($row = $objDatos->registros($datos_desordenados)) {
@@ -62,6 +62,23 @@ class clsJunta {
         $objDatos->cerrarConsulta($datos_desordenados);
         $objDatos->cerrarConexion();
         return $lista;
+    }
+    
+    public function buscarXCodigo($codigo) {
+        $exito = false;
+        $objDatos = new clsDatos();
+        $sql = "select * from junta where COD_JUNTA $codigo";
+        $datos_desordenados = $objDatos->consultar($sql);
+        if ($registros = $objDatos->registros($datos_desordenados)) {
+            $this->cod_junta = $registros['COD_JUNTA'];
+            $this->cod_zona = $registros['COD_ZONA'];
+            $this->desc_junta = $registros['DESC_JUNTA'];
+            $this->sector_nombre = $registros['SECTOR_NOMBRE'];
+            $exito = true;
+        }
+        $objDatos->cerrarConsulta($datos_desordenados);
+        $objDatos->cerrarConexion();
+        return $exito;
     }
 
 }

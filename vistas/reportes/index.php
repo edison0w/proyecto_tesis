@@ -24,17 +24,13 @@ $optionsJunta = optionsJunta($datosJunta);
         <!-- recursos javascript -->
         <script src="../../recursos/js/miJavaScript.js" type="text/javascript"></script>
         <script>
-            function inicializar() {
-                var codigo = document.getElementById('txtCodigo');
-                if (codigo.value != 0) {
-                    activarBotones();
-                }
-            }
         </script>
     </head>
     <body onload="inicializar()">
         <?php include __DIR__ . '/../../recursos/inc/menu.php'; ?>
 
+        <input type="hidden" id="txtCodigo" value="">
+        
         <div id="margen-top" class="container">
 
             <!-- Titulo del Formulario-->
@@ -51,7 +47,7 @@ $optionsJunta = optionsJunta($datosJunta);
 
                     <div class="col-xs-6">
                         <div class="form-group">
-                            <label for="txtPerfil" class="hidden-xs">
+                            <label for="txtPerfil" >
                                 <?php echo $array_ini['juntalocal'] ?>
                             </label>
                             <select id="txtJunta" name="txtJunta" class="selectpicker form-control" data-width="125%">
@@ -65,8 +61,7 @@ $optionsJunta = optionsJunta($datosJunta);
                 <!-- Barra de Navegacion Izquierda-->
                 <div class="row hidden-xs hidden-sm">
                     <div class="container">
-                        <button id="btnGenerar" name="operacion" value="pdf" type="submit" class="btn btn-danger"
-                                disabled="true">
+                        <button id="btnGenerar" name="operacion" value="pdf" type="submit" class="btn btn-danger">
                             <div class="glyphicon glyphicon-ok"></div>
                             <?php echo $array_ini['generar'] ?>
                         </button>

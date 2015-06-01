@@ -18,6 +18,9 @@ if ($_POST['operacion'] == "registrar") {
     $objAsignarCultivo->setObservacion($_POST['txtObs']);
     $objAsignarCultivo->setEstado(true);
     if ($objAsignarCultivo->registrar()) {
+        $objSocio = new clsSocio();
+        $objSocio->buscarXNumTerreno($_SESSION['terreno']->getNum_terreno());
+        $_SESSION['socio'] = $objSocio;
         echo "todos.php";
     } else {
         echo "No se pudo ingresar el cultivo";
